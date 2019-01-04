@@ -1,6 +1,8 @@
+import MovementList from "../components/MovementList";
+
 const Movements = props => (
   <div>
-    <p>This page views/creates each movement</p>
+    <MovementList />
   </div>
 );
 

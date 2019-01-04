@@ -1,54 +1,97 @@
 import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { CURRENT_USER_QUERY } from "./User";
+import gql from "graphql-tag";
+
+const UPDATE_LIFTS_MUTATION = gql`
+  mutation UPDATE_LIFTS_MUTATION(
+    $benchPress: Int
+    $deadLift: Int
+    $press: Int
+    $squat: Int
+  ) {
+    updateLifts(
+      benchPress: $benchPress
+      deadLift: $deadLift
+      press: $press
+      squat: $squat
+    ) {
+      benchPress
+      deadLift
+      press
+      squat
+    }
+  }
+`;
 
 class UserInfo extends React.Component {
-  state = {
-    benchPress: 0,
-    squat: 0,
-    deadLift: 0,
-    press: 0
-  };
+  state = {};
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    const val = parseInt(e.target.value);
+    this.setState({ [e.target.name]: val });
+  };
+  updateLift = async (e, updateLiftMutation) => {
+    e.preventDefault();
+    console.log(this.state);
+    const res = await updateLiftMutation({
+      variables: { ...this.state }
+    });
+    console.log(res);
   };
   render() {
     return (
-      <Query query={CURRENT_USER_QUERY} variables={this.state}>
-        {({ data, loading }) => (
-          <form method="post">
-            <fieldset>
-              <label htmlFor="benchPress">Bench Press</label>
-              <input
-                type="number"
-                onChange={this.handleChange}
-                defaultValue={data.me.benchPress}
-                name="benchPress"
-              />
-              <label htmlFor="deadLift">Deadlift</label>
-              <input
-                type="number"
-                onChange={this.handleChange}
-                defaultValue={data.me.deadLift}
-                name="deadLift"
-              />
-              <label htmlFor="press">Overhead Press</label>
-              <input
-                type="number"
-                onChange={this.handleChange}
-                defaultValue={data.me.press}
-                name="press"
-              />
-              <label htmlFor="squat">Squat</label>
-              <input
-                type="number"
-                onChange={this.handleChange}
-                defaultValue={data.me.squat}
-                name="squat"
-              />
-              <button type="submit">Submit</button>
-            </fieldset>
-          </form>
+      <Query query={CURRENT_USER_QUERY}>
+        {({ data }) => (
+          <Mutation mutation={UPDATE_LIFTS_MUTATION} variables={this.state}>
+            {(updateLifts, { loading, error }) => {
+              {
+                if (loading) return <p>Loading...</p>;
+              }
+              return (
+                <form
+                  method="post"
+                  onSubmit={async e => {
+                    e.preventDefault();
+                    await updateLifts();
+                  }}
+                >
+                  <fieldset disabled={loading} aria-busy={loading}>
+                    <label htmlFor="benchPress">Bench Press:</label>
+                    <input
+                      type="number"
+                      onChange={this.handleChange}
+                      defaultValue={data.me.benchPress}
+                      name="benchPress"
+                    />
+                    <label htmlFor="deadLift">Deadlift:</label>
+                    <input
+                      type="number"
+                      onChange={this.handleChange}
+                      defaultValue={data.me.deadLift}
+                      name="deadLift"
+                    />
+                    <label htmlFor="press">Overhead Press:</label>
+                    <input
+                      type="number"
+                      onChange={this.handleChange}
+                      defaultValue={data.me.press}
+                      name="press"
+                    />
+                    <label htmlFor="squat">Squat:</label>
+                    <input
+                      type="number"
+                      onChange={this.handleChange}
+                      defaultValue={data.me.squat}
+                      name="squat"
+                    />
+                    <button type="submit">
+                      Sav{loading ? "ing" : "e"} Changes
+                    </button>
+                  </fieldset>
+                </form>
+              );
+            }}
+          </Mutation>
         )}
       </Query>
     );

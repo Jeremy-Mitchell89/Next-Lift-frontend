@@ -24,11 +24,14 @@ class Nav extends React.Component {
           <NavStyles>
             {me && (
               <>
-                <Link href="/log">
-                  <a>Create New Log</a>
-                </Link>
                 <Link href="/movements">
                   <a>Movements</a>
+                </Link>
+                <Link href="/newmovement">
+                  <a>Create New Movement</a>
+                </Link>
+                <Link href="/log">
+                  <a>Create New Log</a>
                 </Link>
                 <Link href="/account">
                   <a>Account</a>
