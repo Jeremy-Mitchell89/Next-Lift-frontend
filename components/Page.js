@@ -5,10 +5,7 @@ import Header from "./Header";
 
 const theme = {};
 
-const StyledPage = styled.div`
-  background: white;
-  color: ${props => props.theme.black};
-`;
+const StyledPage = styled.div``;
 
 const Inner = styled.div`
   margin: 0;

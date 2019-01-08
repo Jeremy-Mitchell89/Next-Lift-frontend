@@ -7,6 +7,7 @@ const NavStyles = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
+  background-color: transparent;
   a {
     text-decoration: none;
     color: black;

@@ -1,6 +1,8 @@
+import Movements from "../components/Movements";
+
 const Home = props => (
   <div>
-    <p>This is the homepage</p>
+    <Movements />
   </div>
 );
 

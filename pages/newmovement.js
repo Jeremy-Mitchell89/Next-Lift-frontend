@@ -10,11 +10,4 @@ class newmovement extends React.Component {
     );
   }
 }
-
-// const newmovement = props => (
-//   <div>
-//     <CreateMovement />
-//   </div>
-// );
-
 export default newmovement;

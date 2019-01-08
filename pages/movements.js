@@ -1,9 +1,5 @@
-import MovementList from "../components/MovementList";
+import Movements from "../components/Movements";
 
-const Movements = props => (
-  <div>
-    <MovementList />
-  </div>
-);
+const MovementsPage = props => <Movements />;
 
-export default Movements;
+export default MovementsPage;

@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import StyledForm from "./styles/StyledForm";
 import { Mutation } from "react-apollo";
+import Router from "next/router";
 
 const CREATE_MOVEMENT_MUTATION = gql`
   mutation CREATE_MOVEMENT_MUTATION(
@@ -44,6 +45,10 @@ class CreateMovement extends React.Component {
                 e.preventDefault();
                 const res = await createMove();
                 console.log(res);
+                // Router.push({
+                //   pathname: "./movement",
+                //   query: { id: res.data.createMove.id }
+                // });
               }}
             >
               <h1>Create a New Movement</h1>
