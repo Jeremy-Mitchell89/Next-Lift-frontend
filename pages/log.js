@@ -1,7 +1,5 @@
-const Log = props => (
-  <div>
-    <p>This page creates a new log</p>
-  </div>
-);
+import CreateNewLog from "../components/CreateNewLog";
 
-export default Log;
+const CreateLog = props => <CreateNewLog />;
+
+export default CreateLog;
