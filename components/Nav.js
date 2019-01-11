@@ -31,8 +31,11 @@ class Nav extends React.Component {
                 <Link href="/newmovement">
                   <a>Create New Movement</a>
                 </Link>
-                <Link href="/log">
+                <Link href="/newlog">
                   <a>Create New Log</a>
+                </Link>
+                <Link href="/logs">
+                  <a>View All Logs</a>
                 </Link>
                 <Link href="/account">
                   <a>Account</a>

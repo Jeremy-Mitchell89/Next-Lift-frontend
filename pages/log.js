@@ -1,5 +1,9 @@
-import CreateNewLog from "../components/CreateNewLog";
+import React from "react";
+import LogDetails from "../components/LogDetails";
 
-const CreateLog = props => <CreateNewLog />;
-
-export default CreateLog;
+class log extends React.Component {
+  render() {
+    return <LogDetails />;
+  }
+}
+export default log;
