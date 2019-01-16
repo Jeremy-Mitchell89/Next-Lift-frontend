@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 
-const MoveForm = styled.form`
+const InputContainer = styled.div`
+  width: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
 `;
 
 const ADD_TO_LOG_MUTATION = gql`
-  mutation ADD_TO_LOG_MUTATION($name: String!, $weights: [Int], $reps: [Int]) {
-    addlogmove(name: $name, weights: [$weights], reps: [$reps]) {
-      id
+  mutation ADD_TO_LOG_MUTATION($name: String!, $weight: [Int!], $reps: [Int!]) {
+    createLogMove(name: $name, weight: $weight, reps: $reps) {
+      name
+      weight
+      reps
     }
   }
 `;
@@ -20,8 +24,9 @@ class AddMovement extends React.Component {
     super(props);
     this.state = {
       name: "",
-      weights: [""],
-      reps: [""]
+      weight: [0],
+      reps: [0],
+      id: this.props.id
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
   }
@@ -29,24 +34,24 @@ class AddMovement extends React.Component {
   handleChangeWeight = e => {
     e.preventDefault();
     const index = Number(e.target.name.split("-")[1]);
-    const weight = this.state.weights.map((weight, i) =>
-      i === index ? e.target.value : weight
+    const weight = this.state.weight.map((weight, i) =>
+      i === index ? Number(e.target.value) : weight
     );
-    this.setState({ weights: weight });
+    this.setState({ weight: weight });
   };
   handleChangeReps = e => {
     e.preventDefault();
     const index = Number(e.target.name.split("-")[1]);
     const reps = this.state.reps.map((rep, i) =>
-      i === index ? e.target.value : rep
+      i === index ? Number(e.target.value) : rep
     );
     this.setState({ reps: reps });
   };
   handleNewMovement(e) {
     e.preventDefault();
-    const { weights, reps } = this.state;
+    const { weight, reps } = this.state;
     this.setState({
-      weights: [...weights, weights[weights.length - 1]],
+      weight: [...weight, weight[weight.length - 1]],
       reps: [...reps, reps[reps.length - 1]]
     });
   }
@@ -55,8 +60,9 @@ class AddMovement extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   render() {
-    const weights = this.state.weights.map((weight, i) => (
+    const weights = this.state.weight.map((weight, i) => (
       <input
+        key={i}
         name={`weight-${i}`}
         type="number"
         value={weight}
@@ -65,6 +71,7 @@ class AddMovement extends React.Component {
     ));
     const reps = this.state.reps.map((reps, i) => (
       <input
+        key={i}
         name={`reps-${i}`}
         type="number"
         value={reps}
@@ -72,22 +79,44 @@ class AddMovement extends React.Component {
       />
     ));
     return (
-      <MoveForm>
-        <label>Name of Movement</label>
-        <input
-          name="name"
-          type="string"
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <label>Weight Used </label>
-        <label>Reps</label>
-        {weights}
-        {reps}
-        <button type="button" onClick={this.handleNewMovement}>
-          add Sets
-        </button>
-      </MoveForm>
+      <Mutation
+        mutation={ADD_TO_LOG_MUTATION}
+        variables={{
+          id: this.props.id,
+          name: this.state.name,
+          reps: this.state.reps,
+          weight: this.state.weight
+        }}
+      >
+        {(createLogMove, { loading, error }) => (
+          <form
+            onSubmit={e => {
+              console.log(this.state);
+              e.preventDefault();
+              createLogMove();
+            }}
+          >
+            <h2>Add New Movement Form</h2>
+            <label>Name of Movement</label>
+            <input
+              name="name"
+              type="string"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+            <InputContainer>
+              <label>Weight Used </label>
+              <label>Reps</label>
+              <div>{weights}</div>
+              <div>{reps}</div>
+              <button type="button" onClick={this.handleNewMovement}>
+                add Sets
+              </button>
+            </InputContainer>
+            <button type="submit">Submit Movement</button>
+          </form>
+        )}
+      </Mutation>
     );
   }
 }

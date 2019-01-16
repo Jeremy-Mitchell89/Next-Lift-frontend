@@ -1,9 +1,10 @@
 import React from "react";
 import LogDetails from "../components/LogDetails";
 
-class log extends React.Component {
-  render() {
-    return <LogDetails />;
-  }
-}
-export default log;
+const logdetail = ({ query }) => (
+  <div>
+    <LogDetails id={query.id} />
+  </div>
+);
+
+export default logdetail;

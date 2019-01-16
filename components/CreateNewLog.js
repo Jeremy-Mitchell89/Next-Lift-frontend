@@ -30,7 +30,10 @@ class CreateNewLog extends React.Component {
               onSubmit={async e => {
                 e.preventDefault();
                 const res = await createLog();
-                console.log(res);
+                Router.push({
+                  pathname: "/log",
+                  query: { id: res.data.createLog.id }
+                });
               }}
             >
               <fieldset>
