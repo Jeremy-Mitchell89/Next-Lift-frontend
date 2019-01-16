@@ -2,11 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
+import { LOG_DETAILS_QUERY } from "./LogDetails";
 
 const InputContainer = styled.div`
   width: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+`;
+
+const SubmitButton = styled.button`
+  border: 1px solid;
+  background: none;
+  vertical-align: middle;
+  margin: 1em;
+  padding: 1rem 2 rem;
+  max-width: 250px;
+  min-width: 150px;
 `;
 
 const ADD_TO_LOG_MUTATION = gql`
@@ -26,7 +37,7 @@ class AddMovement extends React.Component {
       name: "",
       weight: [0],
       reps: [0],
-      id: this.props.id
+      show: false
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
   }
@@ -87,35 +98,72 @@ class AddMovement extends React.Component {
           reps: this.state.reps,
           weight: this.state.weight
         }}
+        refetchQueries={[
+          { query: LOG_DETAILS_QUERY, variables: { id: this.props.id } }
+        ]}
       >
-        {(createLogMove, { loading, error }) => (
-          <form
-            onSubmit={e => {
-              console.log(this.state);
-              e.preventDefault();
-              createLogMove();
-            }}
-          >
-            <h2>Add New Movement Form</h2>
-            <label>Name of Movement</label>
-            <input
-              name="name"
-              type="string"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-            <InputContainer>
-              <label>Weight Used </label>
-              <label>Reps</label>
-              <div>{weights}</div>
-              <div>{reps}</div>
-              <button type="button" onClick={this.handleNewMovement}>
-                add Sets
-              </button>
-            </InputContainer>
-            <button type="submit">Submit Movement</button>
-          </form>
-        )}
+        {(createLogMove, { loading, error }) => {
+          {
+            if (this.state.show)
+              return (
+                <section className="content">
+                  <form
+                    onSubmit={e => {
+                      e.preventDefault();
+                      createLogMove();
+                    }}
+                  >
+                    <fieldset>
+                      <h2>Add New Movement</h2>
+                      <label>Name of Movement</label>
+                      <input
+                        name="name"
+                        type="string"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                      />
+                      <InputContainer>
+                        <label>Weight Used </label>
+                        <label>Reps</label>
+                        <div>{weights}</div>
+                        <div>{reps}</div>
+                        <SubmitButton
+                          type="button"
+                          onClick={this.handleNewMovement}
+                        >
+                          Add Sets
+                        </SubmitButton>
+                        <SubmitButton type="submit">
+                          Submit Movement
+                        </SubmitButton>
+                      </InputContainer>
+                    </fieldset>
+                  </form>
+                  <SubmitButton
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ show: !this.state.show });
+                    }}
+                  >
+                    Hide
+                  </SubmitButton>
+                </section>
+              );
+            else
+              return (
+                <div>
+                  <SubmitButton
+                    onClick={e => {
+                      e.preventDefault();
+                      this.setState({ show: !this.state.show });
+                    }}
+                  >
+                    Add New Movement
+                  </SubmitButton>
+                </div>
+              );
+          }
+        }}
       </Mutation>
     );
   }

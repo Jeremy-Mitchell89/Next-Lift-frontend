@@ -45,18 +45,24 @@ class LogDetails extends React.Component {
           return (
             <div>
               <AddMovement id={this.props.id} />
+              <div>
+                <h1>{data.log.title}</h1>
+                <p>{data.log.notes}</p>
+              </div>
               <MovementContainer>
-                {data.log.movements.map(move => {
+                {data.log.movements.map((move, i) => {
                   return (
-                    <div>
+                    <div key={i}>
                       <div>
                         <h1>{move.name}</h1>
                       </div>
                       <SetContainer>
                         {move.weight.map((w, i) => (
-                          <p>
-                            {w}x{move.reps[i]}
-                          </p>
+                          <div key={i}>
+                            <p>
+                              {w}x{move.reps[i]}
+                            </p>
+                          </div>
                         ))}
                       </SetContainer>
                     </div>
@@ -73,3 +79,4 @@ class LogDetails extends React.Component {
 }
 
 export default LogDetails;
+export { LOG_DETAILS_QUERY };

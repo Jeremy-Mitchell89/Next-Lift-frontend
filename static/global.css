@@ -2,3 +2,9 @@ body {
   margin: 0;
   padding: 0;
 }
+.content {
+  padding: 1em 1em 1em;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+}
