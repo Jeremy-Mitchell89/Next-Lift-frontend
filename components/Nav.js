@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import User, { CURRENT_USER_QUERY } from "./User";
+import Signout from "./Signout";
 
 const NavStyles = styled.ul`
   margin: 0;
@@ -35,11 +36,12 @@ class Nav extends React.Component {
                   <a>Create New Log</a>
                 </Link>
                 <Link href="/logs">
-                  <a>View All Logs</a>
+                  <a>View My Logs</a>
                 </Link>
                 <Link href="/account">
                   <a>Account</a>
                 </Link>
+                <Signout />
               </>
             )}
             {!me && (
