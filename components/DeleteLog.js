@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const DELETE_LOG_MUTATION = gql`
   mutation DELETE_LOG_MUTATION($id: ID!) {
-    deletelog(id: $id) {
+    deleteLog(id: $id) {
       id
     }
   }
@@ -31,12 +31,12 @@ class DeleteLog extends Component {
         mutation={DELETE_LOG_MUTATION}
         variables={{ id: this.props.id }}
       >
-        {(deletelog, { error }) => {
+        {(deleteLog, { error }) => {
           return (
             <DeleteButton
               onClick={e => {
                 e.preventDefault();
-                deletelog();
+                deleteLog();
               }}
             >
               Delete Log

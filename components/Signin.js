@@ -2,6 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { CURRENT_USER_QUERY } from "./User";
+import Router from "next/router";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -33,8 +34,9 @@ class Signin extends React.Component {
             method="post"
             onSubmit={async e => {
               e.preventDefault();
-              await signin();
+              signin();
               this.setState({ email: "", password: "" });
+              Router.push("/account");
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>

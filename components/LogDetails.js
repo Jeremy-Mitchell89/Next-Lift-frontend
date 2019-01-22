@@ -4,6 +4,7 @@ import AddMovement from "./AddMovement";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import styled from "styled-components";
+import LogMove from "./LogMove";
 
 const LOG_DETAILS_QUERY = gql`
   query LOG_DETAILS_QUERY($id: ID!) {
@@ -15,6 +16,7 @@ const LOG_DETAILS_QUERY = gql`
         name
         weight
         reps
+        id
       }
     }
   }
@@ -29,12 +31,6 @@ const MovementContainer = styled.div`
   p {
     margin-top: 5px;
   }
-`;
-
-const SetContainer = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  width: 1 rem;
 `;
 
 class LogDetails extends React.Component {
@@ -52,20 +48,14 @@ class LogDetails extends React.Component {
               <MovementContainer>
                 {data.log.movements.map((move, i) => {
                   return (
-                    <div key={i}>
-                      <div>
-                        <h1>{move.name}</h1>
-                      </div>
-                      <SetContainer>
-                        {move.weight.map((w, i) => (
-                          <div key={i}>
-                            <p>
-                              {w}x{move.reps[i]}
-                            </p>
-                          </div>
-                        ))}
-                      </SetContainer>
-                    </div>
+                    <LogMove
+                      logId={this.props.id}
+                      key={move.id}
+                      name={move.name}
+                      weight={move.weight}
+                      reps={move.reps}
+                      id={move.id}
+                    />
                   );
                 })}
               </MovementContainer>

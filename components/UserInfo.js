@@ -99,3 +99,4 @@ class UserInfo extends React.Component {
 }
 
 export default UserInfo;
+export { CURRENT_USER_QUERY };
