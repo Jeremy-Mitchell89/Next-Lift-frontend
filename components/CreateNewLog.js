@@ -36,6 +36,7 @@ class CreateNewLog extends React.Component {
                 });
               }}
             >
+              <h1>Create A New Log</h1>
               <fieldset>
                 <label>Title of Log</label>
                 <input

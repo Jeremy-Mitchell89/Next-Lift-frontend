@@ -8,7 +8,7 @@ const theme = {};
 const StyledPage = styled.div``;
 
 const Inner = styled.div`
-  margin: 0;
+  margin: 0 0;
   padding: 0;
 `;
 

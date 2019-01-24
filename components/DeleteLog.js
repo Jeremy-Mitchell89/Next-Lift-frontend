@@ -25,11 +25,20 @@ const DeleteButton = styled.button`
 `;
 
 class DeleteLog extends Component {
+  update = (cache, payload) => {
+    const data = cache.readQuery({ query: MY_LOGS_QUERY });
+    console.log(payload);
+    data.myLogs = data.myLogs.filter(
+      log => log.id !== payload.data.deleteLog.id
+    );
+    cache.writeQuery({ query: MY_LOGS_QUERY, data });
+  };
   render() {
     return (
       <Mutation
         mutation={DELETE_LOG_MUTATION}
         variables={{ id: this.props.id }}
+        update={this.update}
       >
         {(deleteLog, { error }) => {
           return (

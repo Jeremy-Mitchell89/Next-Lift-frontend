@@ -18,7 +18,7 @@ const ContainerLabels = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 0px;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #333;
   justify-items: center;
   h3 {
     height: 100%;

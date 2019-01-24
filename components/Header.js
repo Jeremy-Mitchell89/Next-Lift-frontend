@@ -12,7 +12,7 @@ const Logo = styled.h1`
   }
   a {
     text-decoration: none;
-    color: black;
+    color: #333;
   }
 `;
 
@@ -20,7 +20,7 @@ const StyledHeader = styled.header`
   .Navbar {
     display: flex;
     justify-content: space-between;
-    border-bottom: 10px solid black;
+    border-bottom: 10px solid #333;
   }
 `;
 
@@ -30,12 +30,10 @@ class Header extends React.Component {
       <StyledHeader>
         <div className="Navbar">
           <Logo>
-            <Link href="/">
-              <a>
-                <img src="../static/barbell.png" alt="barbell icon" />
-                Lift Log
-              </a>
-            </Link>
+            <a>
+              <img src="../static/barbell.png" alt="barbell icon" />
+              Lift Log
+            </a>
           </Logo>
           <Nav />
         </div>

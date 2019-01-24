@@ -2,7 +2,7 @@ import Movements from "../components/Movements";
 
 const Home = props => (
   <div>
-    <h1>Landing Page</h1>
+    <h1>Welcome to the Lift Log!</h1>
   </div>
 );
 

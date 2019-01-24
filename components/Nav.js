@@ -10,11 +10,12 @@ const NavStyles = styled.ul`
   display: flex;
   background-color: transparent;
   a {
+    color: #333;
     text-decoration: none;
-    color: black;
     padding: 1rem 2rem;
     font-size: 2rem;
-    border-left: 3px solid black;
+    border-left: 3px solid #333;
+    transform: skew(-20deg);
   }
 `;
 

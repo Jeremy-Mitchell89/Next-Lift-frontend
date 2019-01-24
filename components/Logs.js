@@ -5,12 +5,34 @@ import styled from "styled-components";
 import Log from "./Log";
 import User from "./User";
 
+// const MY_LOGS_QUERY = gql`
+//   query MY_LOGS_QUERY($skip: Int = 0, $first: Int = 16) {
+//     logs(first: $first, skip: $skip, orderBy: title_DESC) {
+//       id
+//       title
+//       notes
+//       user {
+//         id
+//         name
+//       }
+//     }
+//   }
+// `;
+
 const MY_LOGS_QUERY = gql`
-  query MY_LOGS_QUERY($id: ID!, $skip: Int = 0, $first: Int = 16) {
-    logs(where: { id: $id }, first: $first, skip: $skip, orderBy: title_DESC) {
+  query MY_LOGS_QUERY {
+    myLogs {
       id
       title
       notes
+      movements {
+        weight
+        reps
+      }
+      user {
+        id
+        name
+      }
     }
   }
 `;
@@ -41,13 +63,14 @@ class Logs extends React.Component {
       <User>
         {({ data: { me }, error }) => {
           if (!me) return <h2>Log in to view your Logs!</h2>;
-          if (error) return <p>{error}</p>;
+          // if (error) return <p>{error}</p>;
           return (
             <Query query={MY_LOGS_QUERY} variables={{ id: me.id }}>
               {({ data, error, loading }) => {
+                console.log(data);
                 return (
                   <Container>
-                    {data.logs.map(log => (
+                    {data.myLogs.map(log => (
                       <Log log={log} key={log.id} />
                     ))}
                   </Container>
@@ -62,3 +85,4 @@ class Logs extends React.Component {
 }
 
 export default Logs;
+export { MY_LOGS_QUERY };

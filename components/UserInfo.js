@@ -41,58 +41,63 @@ class UserInfo extends React.Component {
   render() {
     return (
       <Query query={CURRENT_USER_QUERY}>
-        {({ data }) => (
-          <Mutation mutation={UPDATE_LIFTS_MUTATION} variables={this.state}>
-            {(updateLifts, { loading, error }) => {
-              {
-                if (loading) return <p>Loading...</p>;
-              }
-              return (
-                <form
-                  method="post"
-                  onSubmit={async e => {
-                    e.preventDefault();
-                    await updateLifts();
-                  }}
-                >
-                  <fieldset disabled={loading} aria-busy={loading}>
-                    <label htmlFor="benchPress">Bench Press:</label>
-                    <input
-                      type="number"
-                      onChange={this.handleChange}
-                      defaultValue={data.me.benchPress}
-                      name="benchPress"
-                    />
-                    <label htmlFor="deadLift">Deadlift:</label>
-                    <input
-                      type="number"
-                      onChange={this.handleChange}
-                      defaultValue={data.me.deadLift}
-                      name="deadLift"
-                    />
-                    <label htmlFor="press">Overhead Press:</label>
-                    <input
-                      type="number"
-                      onChange={this.handleChange}
-                      defaultValue={data.me.press}
-                      name="press"
-                    />
-                    <label htmlFor="squat">Squat:</label>
-                    <input
-                      type="number"
-                      onChange={this.handleChange}
-                      defaultValue={data.me.squat}
-                      name="squat"
-                    />
-                    <button type="submit">
-                      Sav{loading ? "ing" : "e"} Changes
-                    </button>
-                  </fieldset>
-                </form>
-              );
-            }}
-          </Mutation>
-        )}
+        {({ data, loading }) => {
+          {
+            if (loading) return <p>Loading...</p>;
+          }
+          return (
+            <Mutation mutation={UPDATE_LIFTS_MUTATION} variables={this.state}>
+              {(updateLifts, { loading, error }) => {
+                {
+                  if (loading) return <p>Loading...</p>;
+                }
+                return (
+                  <form
+                    method="post"
+                    onSubmit={async e => {
+                      e.preventDefault();
+                      await updateLifts();
+                    }}
+                  >
+                    <fieldset disabled={loading} aria-busy={loading}>
+                      <label htmlFor="benchPress">Bench Press:</label>
+                      <input
+                        type="number"
+                        onChange={this.handleChange}
+                        defaultValue={data.me.benchPress}
+                        name="benchPress"
+                      />
+                      <label htmlFor="deadLift">Deadlift:</label>
+                      <input
+                        type="number"
+                        onChange={this.handleChange}
+                        defaultValue={data.me.deadLift}
+                        name="deadLift"
+                      />
+                      <label htmlFor="press">Overhead Press:</label>
+                      <input
+                        type="number"
+                        onChange={this.handleChange}
+                        defaultValue={data.me.press}
+                        name="press"
+                      />
+                      <label htmlFor="squat">Squat:</label>
+                      <input
+                        type="number"
+                        onChange={this.handleChange}
+                        defaultValue={data.me.squat}
+                        name="squat"
+                      />
+                      <button type="submit">
+                        Sav{loading ? "ing" : "e"} Changes
+                      </button>
+                    </fieldset>
+                  </form>
+                );
+              }}
+            </Mutation>
+          );
+        }}
       </Query>
     );
   }

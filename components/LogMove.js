@@ -19,31 +19,24 @@ const SetContainer = styled.div`
 `;
 
 class LogMove extends React.Component {
-  // update = (cache, payload) => {
-  //   const data = cache.readQuery({
-  //     query: LOG_DETAILS_QUERY,
-  //     variables: { id: this.props.logId }
-  //   });
-  //   console.log(data, payload);
-  //   data.log.movements = data.log.movements.filter(move => {
-  //     move.id !== payload.data.deleteMove.id;
-  //   });
-  //   cache.writeQuery({
-  //     query: LOG_DETAILS_QUERY,
-  //     data: data,
-  //     variables: { id: this.props.logId }
-  //   });
-  // };
+  update = (cache, payload) => {
+    const data = cache.readQuery({
+      query: LOG_DETAILS_QUERY,
+      variables: { id: this.props.logId }
+    });
+    console.log(data, payload);
+    data.log.movements = data.log.movements.filter(
+      move => move.id !== payload.data.deleteMove.id
+    );
+    cache.writeQuery({ query: LOG_DETAILS_QUERY, data });
+  };
   render() {
     const { name, weight, reps, id } = this.props;
     return (
       <Mutation
         mutation={DELETE_LOGMOVE_MUTATION}
         variables={{ id: id }}
-        // update={this.update}
-        refetchQueries={[
-          { query: LOG_DETAILS_QUERY, variables: { id: this.props.logId } }
-        ]}
+        update={this.update}
       >
         {(deleteMove, { loading, error }) => {
           if (loading) return <p>Removing This Set</p>;
