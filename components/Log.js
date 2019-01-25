@@ -26,16 +26,22 @@ const ContainerLabels = styled.div`
   }
 `;
 
-const EditButton = styled.a`
+const EditButton = styled.button`
   margin: 10px;
   top: 50%;
   font-size: 1.5rem;
   padding: 10px 15px 10px 15px;
   background-color: rgb(244, 152, 65);
+  color: #ffffff;
   :hover {
+    background-color: #f98211;
+    outline: none;
   }
   border-radius: 10px;
   cursor: pointer;
+  :focus {
+    outline: none;
+  }
 `;
 
 class Log extends React.Component {

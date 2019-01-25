@@ -18,10 +18,16 @@ const DeleteButton = styled.button`
   font-size: 1.5rem;
   padding: 10px 15px 10px 15px;
   background-color: rgb(244, 80, 66);
+  color: #e2e2e2;
   :hover {
     cursor: pointer;
+    background-color: #ed2a1a;
+    outline: none;
   }
   border-radius: 10px;
+  :focus {
+    outline: none;
+  }
 `;
 
 class DeleteLog extends Component {

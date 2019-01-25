@@ -3,6 +3,7 @@ import styled from "styled-components";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { LOG_DETAILS_QUERY } from "./LogDetails";
+import StyledForm from "./styles/StyledForm";
 
 const InputContainer = styled.div`
   width: 1rem;
@@ -107,7 +108,7 @@ class AddMovement extends React.Component {
             if (this.state.show)
               return (
                 <section className="content">
-                  <form
+                  <StyledForm
                     onSubmit={e => {
                       e.preventDefault();
                       createLogMove();
@@ -138,7 +139,7 @@ class AddMovement extends React.Component {
                         </SubmitButton>
                       </InputContainer>
                     </fieldset>
-                  </form>
+                  </StyledForm>
                   <SubmitButton
                     onClick={e => {
                       e.preventDefault();

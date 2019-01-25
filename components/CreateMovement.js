@@ -68,41 +68,45 @@ class CreateMovement extends React.Component {
                   value={this.state.description}
                   onChange={this.handleChange}
                 />
-                <select
-                  required
-                  name="primaryMuscleWorked"
-                  value={this.state.primaryMuscleWorked}
-                  onChange={this.handleChange}
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <option selected>Chose Primary Muscle</option>
-                  <option>Chest</option>
-                  <option>Back</option>
-                  <option>Quads</option>
-                  <option>Hamstrings</option>
-                  <option>Calf</option>
-                  <option>Abs</option>
-                  <option>Shoulders</option>
-                  <option>Biceps</option>
-                  <option>Triceps</option>
-                </select>
-                <select
-                  name="secondaryMuscleWorked"
-                  value={this.state.secondaryMuscleWorked}
-                  onChange={this.handleChange}
-                >
-                  <option selected>Chose Secondary Muscle</option>
-                  <option>Chest</option>
-                  <option>Back</option>
-                  <option>Quads</option>
-                  <option>Hamstrings</option>
-                  <option>Calf</option>
-                  <option>Abs</option>
-                  <option>Shoulders</option>
-                  <option>Biceps</option>
-                  <option>Triceps</option>
-                </select>
+                  <select
+                    required
+                    name="primaryMuscleWorked"
+                    value={this.state.primaryMuscleWorked}
+                    onChange={this.handleChange}
+                  >
+                    <option defaultValue>Chose Primary Muscle</option>
+                    <option>Chest</option>
+                    <option>Back</option>
+                    <option>Quads</option>
+                    <option>Hamstrings</option>
+                    <option>Calf</option>
+                    <option>Abs</option>
+                    <option>Shoulders</option>
+                    <option>Biceps</option>
+                    <option>Triceps</option>
+                  </select>
+                  <select
+                    name="secondaryMuscleWorked"
+                    value={this.state.secondaryMuscleWorked}
+                    onChange={this.handleChange}
+                  >
+                    <option defaultValue>Chose Secondary Muscle</option>
+                    <option>Chest</option>
+                    <option>Back</option>
+                    <option>Quads</option>
+                    <option>Hamstrings</option>
+                    <option>Calf</option>
+                    <option>Abs</option>
+                    <option>Shoulders</option>
+                    <option>Biceps</option>
+                    <option>Triceps</option>
+                  </select>
+                </div>
+                <button type="submit">Submit</button>
               </fieldset>
-              <button type="submit">Submit</button>
             </StyledForm>
           );
         }}

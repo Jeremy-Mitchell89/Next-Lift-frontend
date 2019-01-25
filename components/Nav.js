@@ -17,6 +17,9 @@ const NavStyles = styled.ul`
     border-left: 3px solid #333;
     transform: skew(-20deg);
   }
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 class Nav extends React.Component {

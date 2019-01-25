@@ -2,6 +2,7 @@ import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { CURRENT_USER_QUERY } from "./User";
 import gql from "graphql-tag";
+import StyledForm from "./styles/StyledForm";
 
 const UPDATE_LIFTS_MUTATION = gql`
   mutation UPDATE_LIFTS_MUTATION(
@@ -52,7 +53,7 @@ class UserInfo extends React.Component {
                   if (loading) return <p>Loading...</p>;
                 }
                 return (
-                  <form
+                  <StyledForm
                     method="post"
                     onSubmit={async e => {
                       e.preventDefault();
@@ -92,7 +93,7 @@ class UserInfo extends React.Component {
                         Sav{loading ? "ing" : "e"} Changes
                       </button>
                     </fieldset>
-                  </form>
+                  </StyledForm>
                 );
               }}
             </Mutation>
