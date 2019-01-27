@@ -7,7 +7,6 @@ const StyledForm = styled.form`
   padding: 20px;
   line-height: 1.5;
   font-weight: 600;
-
   label {
     display: block;
     margin-bottom: 1rem;

@@ -21,10 +21,11 @@ import User from "./User";
 
 const MY_LOGS_QUERY = gql`
   query MY_LOGS_QUERY {
-    myLogs {
+    myLogs(orderBy: createdAt_DESC) {
       id
       title
       notes
+      createdAt
       movements {
         weight
         reps
@@ -67,7 +68,7 @@ class Logs extends React.Component {
           return (
             <Query query={MY_LOGS_QUERY} variables={{ id: me.id }}>
               {({ data, error, loading }) => {
-                console.log(data);
+                if (loading) return <p>loading...</p>;
                 return (
                   <Container>
                     {data.myLogs.map(log => (

@@ -46,7 +46,7 @@ class DeleteLog extends Component {
         variables={{ id: this.props.id }}
         update={this.update}
       >
-        {(deleteLog, { error }) => {
+        {(deleteLog, { error, loading }) => {
           return (
             <DeleteButton
               onClick={e => {

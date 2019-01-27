@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  font-family: "Oxygen", sans-serif;
+  src: url("https://fonts.googleapis.com/css?family=Oxygen");
 }
 .content {
   padding: 1em 1em 1em;
