@@ -64,11 +64,6 @@ class Log extends React.Component {
           </div>
           <div>
             <p>{this.props.log.notes}</p>
-            <p>
-              {console.log(
-                format(parse(this.props.log.createdAt), "MM/DD/YYYY")
-              )}
-            </p>
           </div>
           <div>
             <Link href={{ pathname: "log", query: { id: this.props.log.id } }}>
