@@ -24,7 +24,6 @@ class LogMove extends React.Component {
       query: LOG_DETAILS_QUERY,
       variables: { id: this.props.logId }
     });
-    console.log(data, payload);
     data.log.movements = data.log.movements.filter(
       move => move.id !== payload.data.deleteMove.id
     );

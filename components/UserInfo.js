@@ -4,6 +4,7 @@ import { CURRENT_USER_QUERY } from "./User";
 import gql from "graphql-tag";
 import WeightForm from "./Weight";
 import styled from "styled-components";
+import Weights from "./Weights";
 
 const StyledForm = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -165,6 +166,7 @@ class UserInfo extends React.Component {
                       </fieldset>
                     </StyledForm>
                     <WeightForm />
+                    <Weights />
                   </div>
                 );
               }}

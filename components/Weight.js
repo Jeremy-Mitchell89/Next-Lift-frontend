@@ -91,9 +91,10 @@ class WeightForm extends React.Component {
               onSubmit={e => {
                 e.preventDefault();
                 createWeight();
+                this.setState({ weight: 0 });
               }}
             >
-              <fieldset>
+              <fieldset disabled={loading} aria-busy={loading}>
                 <h1>Enter Today's Weight</h1>
                 <input
                   value={this.state.weight}
