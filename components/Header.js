@@ -4,11 +4,11 @@ import Nav from "./Nav";
 import Link from "next/link";
 
 const Logo = styled.h1`
-  padding: 0px;
+  padding: 0;
   margin: 0;
-  font-size: 4rem;
+  font-size: 3.8rem;
   img {
-    max-width: 50px;
+    max-width: 40px;
   }
   a {
     text-decoration: none;

@@ -1,14 +1,27 @@
 import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { format, parse } from "date-fns";
+
+import styled from "styled-components";
+import Weight from "./Weight";
 
 const WEIGHTS_QUERY = gql`
   query WEIGHTS_QUERY {
     weights(orderBy: createdAt_ASC) {
       weight
       createdAt
+      id
     }
+  }
+`;
+
+const WeightContainer = styled.div`
+  margin-left: 3%;
+  display: grid;
+  grid-template-columns: 100px 120px 1fr;
+  width: 80%;
+  div {
+    /* border: 1px solid black; */
   }
 `;
 
@@ -17,14 +30,20 @@ class Weights extends React.Component {
     return (
       <Query query={WEIGHTS_QUERY}>
         {({ data, loading, error }) => {
+          if (data.weights.length < 1) {
+            return <p>Enter a Weight to start tracking your progess!</p>;
+          }
           return (
             <div>
-              {data.weights.map(weight => (
-                <div>
-                  <p>{weight.weight}</p>
-                  <p>{format(parse(weight.createdAt), "MM/DD/YYYY")}</p>
-                </div>
-              ))}
+              <h1 style={{ paddingTop: "4%" }}>Weight Tracker</h1>
+              <WeightContainer>
+                <h3 style={{ textAlign: "center" }}>Date</h3>
+                <h3 style={{ textAlign: "center" }}>Weight</h3>
+                <span />
+                {data.weights.map(weight => (
+                  <Weight key={weight.id} weight={weight} />
+                ))}
+              </WeightContainer>
             </div>
           );
         }}
@@ -33,3 +52,4 @@ class Weights extends React.Component {
   }
 }
 export default Weights;
+export { WEIGHTS_QUERY };

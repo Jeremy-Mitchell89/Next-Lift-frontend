@@ -20,6 +20,7 @@ const Signout = props => (
   >
     {signout => (
       <a
+        style={{ marginRight: "20px" }}
         onClick={e => {
           signout();
           Router.push("/");

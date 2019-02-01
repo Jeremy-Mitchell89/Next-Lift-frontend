@@ -33,7 +33,6 @@ const DeleteButton = styled.button`
 class DeleteLog extends Component {
   update = (cache, payload) => {
     const data = cache.readQuery({ query: MY_LOGS_QUERY });
-    console.log(payload);
     data.myLogs = data.myLogs.filter(
       log => log.id !== payload.data.deleteLog.id
     );

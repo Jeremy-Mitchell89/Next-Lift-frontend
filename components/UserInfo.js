@@ -2,7 +2,7 @@ import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { CURRENT_USER_QUERY } from "./User";
 import gql from "graphql-tag";
-import WeightForm from "./Weight";
+import WeightForm from "./CreateWeight";
 import styled from "styled-components";
 import Weights from "./Weights";
 
@@ -13,7 +13,6 @@ const StyledForm = styled.form`
   padding: 20px;
   line-height: 1.5;
   font-weight: 600;
-  width: 60%;
   margin: 0 auto;
   label {
     display: block;
@@ -122,51 +121,60 @@ class UserInfo extends React.Component {
                   if (loading) return <p>Loading...</p>;
                 }
                 return (
-                  <div style={{ width: "80%", margin: "0 auto" }}>
-                    <StyledForm
-                      method="post"
-                      onSubmit={async e => {
-                        e.preventDefault();
-                        await updateLifts();
-                      }}
-                    >
-                      <fieldset disabled={loading} aria-busy={loading}>
-                        <h1>{data.me.name}'s Information</h1>
-                        <label htmlFor="benchPress">Bench Press:</label>
-                        <input
-                          type="number"
-                          onChange={this.handleChange}
-                          defaultValue={data.me.benchPress}
-                          name="benchPress"
-                        />
-                        <label htmlFor="deadLift">Deadlift:</label>
-                        <input
-                          type="number"
-                          onChange={this.handleChange}
-                          defaultValue={data.me.deadLift}
-                          name="deadLift"
-                        />
-                        <label htmlFor="press">Overhead Press:</label>
-                        <input
-                          type="number"
-                          onChange={this.handleChange}
-                          defaultValue={data.me.press}
-                          name="press"
-                        />
-                        <label htmlFor="squat">Squat:</label>
-                        <input
-                          type="number"
-                          onChange={this.handleChange}
-                          defaultValue={data.me.squat}
-                          name="squat"
-                        />
-                        <button type="submit">
-                          Sav{loading ? "ing" : "e"} Changes
-                        </button>
-                      </fieldset>
-                    </StyledForm>
-                    <WeightForm />
-                    <Weights />
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr"
+                    }}
+                  >
+                    <div>
+                      <WeightForm />
+                      <StyledForm
+                        method="post"
+                        onSubmit={async e => {
+                          e.preventDefault();
+                          await updateLifts();
+                        }}
+                      >
+                        <fieldset disabled={loading} aria-busy={loading}>
+                          <h1>{data.me.name}'s Information</h1>
+                          <label htmlFor="benchPress">Bench Press:</label>
+                          <input
+                            type="number"
+                            onChange={this.handleChange}
+                            defaultValue={data.me.benchPress}
+                            name="benchPress"
+                          />
+                          <label htmlFor="deadLift">Deadlift:</label>
+                          <input
+                            type="number"
+                            onChange={this.handleChange}
+                            defaultValue={data.me.deadLift}
+                            name="deadLift"
+                          />
+                          <label htmlFor="press">Overhead Press:</label>
+                          <input
+                            type="number"
+                            onChange={this.handleChange}
+                            defaultValue={data.me.press}
+                            name="press"
+                          />
+                          <label htmlFor="squat">Squat:</label>
+                          <input
+                            type="number"
+                            onChange={this.handleChange}
+                            defaultValue={data.me.squat}
+                            name="squat"
+                          />
+                          <button type="submit">
+                            Sav{loading ? "ing" : "e"} Changes
+                          </button>
+                        </fieldset>
+                      </StyledForm>
+                    </div>
+                    <div>
+                      <Weights />
+                    </div>
                   </div>
                 );
               }}

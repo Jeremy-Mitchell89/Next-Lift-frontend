@@ -12,7 +12,7 @@ const NavStyles = styled.ul`
   a {
     color: #333;
     text-decoration: none;
-    padding: 1rem 2rem;
+    padding: 1rem 1.8rem;
     font-size: 2rem;
     border-left: 3px solid #333;
     transform: skew(-20deg);
@@ -34,7 +34,7 @@ class Nav extends React.Component {
                   <a>Movements</a>
                 </Link>
                 <Link href="/newmovement">
-                  <a>Create New Movement</a>
+                  <a>New Movement</a>
                 </Link>
                 <Link href="/newlog">
                   <a>Create New Log</a>
