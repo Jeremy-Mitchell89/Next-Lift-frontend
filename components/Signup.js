@@ -29,6 +29,7 @@ class Signup extends React.Component {
     e.preventDefault();
     await signup();
     this.setState({ email: "", name: "", password: "" });
+    Router.push({ pathname: "/newlog" });
   };
   render() {
     return (

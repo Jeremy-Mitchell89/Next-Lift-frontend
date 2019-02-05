@@ -20,9 +20,6 @@ const WeightContainer = styled.div`
   display: grid;
   grid-template-columns: 100px 120px 1fr;
   width: 80%;
-  div {
-    /* border: 1px solid black; */
-  }
 `;
 
 class Weights extends React.Component {
@@ -30,7 +27,7 @@ class Weights extends React.Component {
     return (
       <Query query={WEIGHTS_QUERY}>
         {({ data, loading, error }) => {
-          if (data.weights.length < 1) {
+          if (!data.weights.length) {
             return <p>Enter a Weight to start tracking your progess!</p>;
           }
           return (

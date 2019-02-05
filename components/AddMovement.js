@@ -123,8 +123,8 @@ class AddMovement extends React.Component {
     super(props);
     this.state = {
       name: "",
-      weight: [0],
-      reps: [0],
+      weight: [],
+      reps: [],
       show: false
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
@@ -206,7 +206,7 @@ class AddMovement extends React.Component {
                     onSubmit={e => {
                       e.preventDefault();
                       createLogMove();
-                      this.setState({ name: "", weight: [0], reps: [0] });
+                      this.setState({ name: "", weight: [], reps: [] });
                     }}
                   >
                     <fieldset disabled={loading} aria-busy={loading}>

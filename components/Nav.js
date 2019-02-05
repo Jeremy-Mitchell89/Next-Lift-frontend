@@ -50,7 +50,7 @@ class Nav extends React.Component {
             )}
             {!me && (
               <Link href="/signup">
-                <a>Signup</a>
+                <a>Signup/Sign In</a>
               </Link>
             )}
           </NavStyles>
