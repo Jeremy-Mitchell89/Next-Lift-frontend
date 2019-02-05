@@ -43,7 +43,7 @@ class Nav extends React.Component {
                   <a>View My Logs</a>
                 </Link>
                 <Link href="/account">
-                  <a>Account</a>
+                  <a>User Info</a>
                 </Link>
                 <Signout />
               </>

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import { LOG_DETAILS_QUERY } from "./LogDetails";
-// import StyledForm from "./styles/StyledForm";
+import { CURRENT_USER_QUERY } from "./User";
 
 const StyledForm = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -160,21 +160,19 @@ class AddMovement extends React.Component {
   };
   render() {
     const weights = this.state.weight.map((weight, i) => (
-      <ul key={i}>
-        <li>
-          {i + 1}.
-          <input
-            key={i}
-            name={`weight-${i}`}
-            type="number"
-            value={weight}
-            onChange={this.handleChangeWeight}
-          />
-        </li>
-      </ul>
+      <li key={i}>
+        {i + 1}.
+        <input
+          key={i}
+          name={`weight-${i}`}
+          type="number"
+          value={weight}
+          onChange={this.handleChangeWeight}
+        />
+      </li>
     ));
     const reps = this.state.reps.map((reps, i) => (
-      <ul key={i}>
+      <li key={i}>
         <input
           key={i}
           name={`reps-${i}`}
@@ -182,85 +180,89 @@ class AddMovement extends React.Component {
           value={reps}
           onChange={this.handleChangeReps}
         />
-      </ul>
+      </li>
     ));
     return (
-      <Mutation
-        mutation={ADD_TO_LOG_MUTATION}
-        variables={{
-          id: this.props.id,
-          name: this.state.name,
-          reps: this.state.reps,
-          weight: this.state.weight
-        }}
-        refetchQueries={[
-          { query: LOG_DETAILS_QUERY, variables: { id: this.props.id } }
-        ]}
-      >
-        {(createLogMove, { loading, error }) => {
-          {
-            if (this.state.show)
-              return (
-                <section className="content">
-                  <StyledForm
-                    onSubmit={e => {
-                      e.preventDefault();
-                      createLogMove();
-                      this.setState({ name: "", weight: [], reps: [] });
-                    }}
-                  >
-                    <fieldset disabled={loading} aria-busy={loading}>
-                      <h2>Add New Movement</h2>
-                      <label>Name of Movement</label>
-                      <input
-                        name="name"
-                        type="string"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                      />
-                      <InputContainer>
-                        <label>Weight Used </label>
-                        <label>Reps</label>
-                        <div>{weights}</div>
-                        <div>{reps}</div>
-                        <SubmitButton
-                          type="button"
-                          onClick={this.handleNewMovement}
-                        >
-                          Add Set
-                        </SubmitButton>
-                        <SubmitButton type="submit">
-                          Submit Movement
-                        </SubmitButton>
-                      </InputContainer>
-                    </fieldset>
-                  </StyledForm>
-                  <SubmitButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({ show: !this.state.show });
-                    }}
-                  >
-                    Hide
-                  </SubmitButton>
-                </section>
-              );
-            else
-              return (
-                <div>
-                  <SubmitButton
-                    onClick={e => {
-                      e.preventDefault();
-                      this.setState({ show: !this.state.show });
-                    }}
-                  >
-                    Add New Movement
-                  </SubmitButton>
-                </div>
-              );
-          }
-        }}
-      </Mutation>
+      <Query query={CURRENT_USER_QUERY}>
+        {({ data }) => (
+          <Mutation
+            mutation={ADD_TO_LOG_MUTATION}
+            variables={{
+              id: this.props.id,
+              name: this.state.name,
+              reps: this.state.reps,
+              weight: this.state.weight
+            }}
+            refetchQueries={[
+              { query: LOG_DETAILS_QUERY, variables: { id: this.props.id } }
+            ]}
+          >
+            {(createLogMove, { loading, error }) => {
+              {
+                if (this.state.show)
+                  return (
+                    <section className="content">
+                      <StyledForm
+                        onSubmit={e => {
+                          e.preventDefault();
+                          createLogMove();
+                          this.setState({ name: "", weight: [], reps: [] });
+                        }}
+                      >
+                        <fieldset disabled={loading} aria-busy={loading}>
+                          <h2>Add New Movement{console.log(data)}</h2>
+                          <label>Name of Movement</label>
+                          <input
+                            name="name"
+                            type="string"
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                          />
+                          <InputContainer>
+                            <label>Weight Used </label>
+                            <label>Reps</label>
+                            <div>{weights}</div>
+                            <div>{reps}</div>
+                            <SubmitButton
+                              type="button"
+                              onClick={this.handleNewMovement}
+                            >
+                              Add Set
+                            </SubmitButton>
+                            <SubmitButton type="submit">
+                              Submit Movement
+                            </SubmitButton>
+                          </InputContainer>
+                        </fieldset>
+                      </StyledForm>
+                      <SubmitButton
+                        onClick={e => {
+                          e.preventDefault();
+                          this.setState({ show: !this.state.show });
+                        }}
+                      >
+                        Hide
+                      </SubmitButton>
+                    </section>
+                  );
+                else
+                  return (
+                    <div>
+                      <SubmitButton
+                        onClick={e => {
+                          e.preventDefault();
+                          this.setState({ show: !this.state.show });
+                        }}
+                      >
+                        Add New Movement
+                      </SubmitButton>
+                    </div>
+                  );
+              }
+            }}
+          </Mutation>
+        )}
+      </Query>
     );
   }
 }
