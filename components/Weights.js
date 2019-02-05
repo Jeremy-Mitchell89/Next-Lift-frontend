@@ -27,7 +27,7 @@ class Weights extends React.Component {
     return (
       <Query query={WEIGHTS_QUERY}>
         {({ data, loading, error }) => {
-          if (!data.weights.length) {
+          if (!data.weights) {
             return <p>Enter a Weight to start tracking your progess!</p>;
           }
           return (
