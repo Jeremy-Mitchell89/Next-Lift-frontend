@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { Mutation, Query } from "react-apollo";
 import { LOG_DETAILS_QUERY } from "./LogDetails";
 import { CURRENT_USER_QUERY } from "./User";
+import SearchMovement from "./SearchMovement";
 
 const StyledForm = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -77,19 +78,10 @@ const StyledForm = styled.form`
     margin-left: 0;
     padding-left: 0;
   }
-`;
-
-const InputContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  input {
-    margin: 10px;
-  }
   li {
-    list-style: none;
+    list-style-type: none;
   }
 `;
-
 const SubmitButton = styled.button`
   max-height: 70px;
   top: 50%;
@@ -123,8 +115,8 @@ class AddMovement extends React.Component {
     super(props);
     this.state = {
       name: "",
-      weight: [],
-      reps: [],
+      weight: [""],
+      reps: [""],
       show: false
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
@@ -160,27 +152,31 @@ class AddMovement extends React.Component {
   };
   render() {
     const weights = this.state.weight.map((weight, i) => (
-      <li key={i}>
-        {i + 1}.
-        <input
-          key={i}
-          name={`weight-${i}`}
-          type="number"
-          value={weight}
-          onChange={this.handleChangeWeight}
-        />
-      </li>
-    ));
-    const reps = this.state.reps.map((reps, i) => (
-      <li key={i}>
-        <input
-          key={i}
-          name={`reps-${i}`}
-          type="number"
-          value={reps}
-          onChange={this.handleChangeReps}
-        />
-      </li>
+      <div key={i} style={{ display: "flex" }}>
+        <div>
+          <li>
+            {i + 1}.
+            <input
+              key={i}
+              name={`weight-${i}`}
+              type="number"
+              value={weight}
+              onChange={this.handleChangeWeight}
+            />
+          </li>
+        </div>
+        <div>
+          <li>
+            <input
+              key={i}
+              name={`reps-${i}`}
+              type="number"
+              value={this.state.reps[i]}
+              onChange={this.handleChangeReps}
+            />
+          </li>
+        </div>
+      </div>
     ));
     return (
       <Query query={CURRENT_USER_QUERY}>
@@ -210,29 +206,32 @@ class AddMovement extends React.Component {
                         }}
                       >
                         <fieldset disabled={loading} aria-busy={loading}>
-                          <h2>Add New Movement{console.log(data)}</h2>
+                          <h2>Add New Movement</h2>
                           <label>Name of Movement</label>
-                          <input
+                          <SearchMovement
                             name="name"
                             type="string"
                             value={this.state.name}
-                            onChange={this.handleChange}
                           />
-                          <InputContainer>
+                          <div
+                            style={{
+                              display: "grid",
+                              gridTemplateColumns: "1fr 1fr"
+                            }}
+                          >
                             <label>Weight Used </label>
                             <label>Reps</label>
-                            <div>{weights}</div>
-                            <div>{reps}</div>
-                            <SubmitButton
-                              type="button"
-                              onClick={this.handleNewMovement}
-                            >
-                              Add Set
-                            </SubmitButton>
-                            <SubmitButton type="submit">
-                              Submit Movement
-                            </SubmitButton>
-                          </InputContainer>
+                          </div>
+                          <div>{weights}</div>
+                          <SubmitButton
+                            type="button"
+                            onClick={this.handleNewMovement}
+                          >
+                            Add Set
+                          </SubmitButton>
+                          <SubmitButton type="submit">
+                            Submit Movement
+                          </SubmitButton>
                         </fieldset>
                       </StyledForm>
                       <SubmitButton
