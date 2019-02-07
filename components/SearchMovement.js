@@ -49,7 +49,7 @@ const SEARCH_MOVEMENTS_QUERY = gql`
 `;
 
 class SearchMovement extends React.Component {
-  state = { movements: [], loading: false };
+  state = { movements: [], loading: false, name: "" };
   onChange = debounce(async (e, client) => {
     this.setState({ loading: true });
     const res = await client.query({
@@ -64,13 +64,17 @@ class SearchMovement extends React.Component {
       <SearchStyles>
         <Downshift
           itemToString={movement => (movement === null ? "" : movement.name)}
+          onInputValueChange={e => {
+            this.props.passValUp(e);
+          }}
         >
           {({
             getInputProps,
             getItemProps,
             isOpen,
             inputValue,
-            highlightedIndex
+            highlightedIndex,
+            onInputValueChange
           }) => (
             <div>
               <ApolloConsumer>
@@ -80,7 +84,9 @@ class SearchMovement extends React.Component {
                       type: "search",
                       placeholder: "Search For A Movement",
                       id: "search",
+
                       onChange: e => {
+                        this.props.passValUp(e.target.value);
                         e.persist();
                         this.onChange(e, client);
                       }
@@ -98,7 +104,10 @@ class SearchMovement extends React.Component {
                     >
                       {movement.name}
                     </DropDownItem>
-                  ))}
+                  ))}{" "}
+                  {!this.state.movements.length && !this.state.loading && (
+                    <DropDownItem> Nothing Found For {inputValue}</DropDownItem>
+                  )}
                 </DropDown>
               )}
             </div>

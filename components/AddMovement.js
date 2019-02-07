@@ -120,6 +120,7 @@ class AddMovement extends React.Component {
       show: false
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
+    // this.valUp = this.passVal.bind(this);
   }
 
   handleChangeWeight = e => {
@@ -149,6 +150,9 @@ class AddMovement extends React.Component {
   handleChange = e => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
+  };
+  passVal = childData => {
+    this.setState({ name: childData });
   };
   render() {
     const weights = this.state.weight.map((weight, i) => (
@@ -211,7 +215,7 @@ class AddMovement extends React.Component {
                           <SearchMovement
                             name="name"
                             type="string"
-                            value={this.state.name}
+                            passValUp={this.passVal}
                           />
                           <div
                             style={{
