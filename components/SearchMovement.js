@@ -39,13 +39,13 @@ class SearchMovement extends React.Component {
             getItemProps,
             isOpen,
             inputValue,
-            highlightedIndex,
-            onInputValueChange
+            highlightedIndex
           }) => (
             <div>
               <ApolloConsumer>
                 {client => (
                   <input
+                    required
                     {...getInputProps({
                       type: "search",
                       placeholder: "Search For A Movement",

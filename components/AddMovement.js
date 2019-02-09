@@ -6,6 +6,7 @@ import { LOG_DETAILS_QUERY } from "./LogDetails";
 import { CURRENT_USER_QUERY } from "./User";
 import SearchMovement from "./SearchMovement";
 import { StyledFormAddMovement, SubmitButton } from "./styles/StyledForm";
+import Error from "./ErrorMessage";
 
 const ADD_TO_LOG_MUTATION = gql`
   mutation ADD_TO_LOG_MUTATION($name: String!, $weight: [Int!], $reps: [Int!]) {
@@ -78,7 +79,6 @@ class AddMovement extends React.Component {
       "Overhead Press": "press"
     };
     const selected = movementCorrelation[move];
-    console.log(data.me[selected]);
     let weights = [];
     let reps = [];
     for (
@@ -167,6 +167,7 @@ class AddMovement extends React.Component {
                           this.setState({ name: "", weight: [], reps: [] });
                         }}
                       >
+                        <Error error={error} />
                         <fieldset disabled={loading} aria-busy={loading}>
                           <h2>Add New Movement</h2>
                           <label>Name of Movement</label>

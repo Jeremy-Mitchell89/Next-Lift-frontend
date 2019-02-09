@@ -44,10 +44,10 @@ class CreateMovement extends React.Component {
               onSubmit={async e => {
                 e.preventDefault();
                 const res = await createMove();
-                // Router.push({
-                //   pathname: "./movement",
-                //   query: { id: res.data.createMove.id }
-                // });
+                Router.push({
+                  pathname: "/movements"
+                  // query: { id: res.data.createMove.id }
+                });
               }}
             >
               <h1>Create a New Movement</h1>

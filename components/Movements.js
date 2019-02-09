@@ -30,7 +30,7 @@ const Container = styled.div`
 `;
 const ContainerLabels = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 0px;
   border-bottom: 3px solid black;
   background-color: white;
@@ -48,6 +48,7 @@ class Movements extends React.Component {
                 <h2>Description</h2>
                 <h2>Primary Muscle Worked</h2>
                 <h2>Secondary Muscle Worked</h2>
+                <div />
               </ContainerLabels>
               {data.movements.map(movement => (
                 <Movement move={movement} key={movement.id} />
@@ -61,3 +62,5 @@ class Movements extends React.Component {
 }
 
 export default Movements;
+
+export { ALL_MOVEMENTS_QUERY };

@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 import Log from "./Log";
 import User from "./User";
+import Error from "./ErrorMessage";
 
 // const MY_LOGS_QUERY = gql`
 //   query MY_LOGS_QUERY($skip: Int = 0, $first: Int = 16) {
@@ -71,6 +72,7 @@ class Logs extends React.Component {
                 if (loading) return <p>loading...</p>;
                 return (
                   <Container>
+                    <Error error={error} />
                     {data.myLogs.map(log => (
                       <Log log={log} key={log.id} />
                     ))}
