@@ -1,5 +1,6 @@
 import React from "react";
 import gql from "graphql-tag";
+import routines from "../static/percentages";
 import { Mutation, Query } from "react-apollo";
 import { LOG_DETAILS_QUERY } from "./LogDetails";
 import { CURRENT_USER_QUERY } from "./User";
@@ -23,7 +24,9 @@ class AddMovement extends React.Component {
       name: "",
       weight: [""],
       reps: [""],
-      show: false
+      show: false,
+      routine: "standard531",
+      week: "week1"
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
   }
@@ -59,6 +62,48 @@ class AddMovement extends React.Component {
   passVal = childData => {
     this.setState({ name: childData });
   };
+  handleRoutine = e => {
+    e.preventDefault();
+    this.setState({ routine: e.target.value });
+  };
+  handleWeek = e => {
+    e.preventDefault();
+    this.setState({ week: e.target.value });
+  };
+  addRoutine = (data, move) => {
+    const movementCorrelation = {
+      "Bench Press": "benchPress",
+      Squat: "squat",
+      DeadLift: "deadLift",
+      "Overhead Press": "press"
+    };
+    const selected = movementCorrelation[move];
+    console.log(data.me[selected]);
+    let weights = [];
+    let reps = [];
+    for (
+      var i = 0;
+      i < routines[this.state.routine][this.state.week].reps.length;
+      i++
+    ) {
+      weights.push(
+        Math.round(
+          Math.round(
+            (routines[this.state.routine][this.state.week].weight[i] *
+              data.me[selected]) /
+              5
+          ) * 5
+        )
+      );
+      reps.push(routines[this.state.routine][this.state.week].reps[i]);
+    }
+    if (selected) {
+      this.setState({ weight: weights, reps: reps });
+    } else
+      alert(
+        "Enter Bench Press, DeadLift, Squat, or Overhead Press as movement to add routine sets"
+      );
+  };
   render() {
     const weights = this.state.weight.map((weight, i) => (
       <div key={i} style={{ display: "flex" }}>
@@ -87,6 +132,14 @@ class AddMovement extends React.Component {
         </div>
       </div>
     ));
+    const routineOptions = Object.keys(routines).map((routine, i) => {
+      return <option key={i}>{routine}</option>;
+    });
+    const weekOptions = Object.keys(routines[this.state.routine]).map(
+      (week, i) => {
+        return <option key={i}>{week}</option>;
+      }
+    );
     return (
       <Query query={CURRENT_USER_QUERY}>
         {({ data }) => (
@@ -143,6 +196,22 @@ class AddMovement extends React.Component {
                           </SubmitButton>
                         </fieldset>
                       </StyledFormAddMovement>
+                      <form>
+                        <select onChange={this.handleRoutine}>
+                          {routineOptions}
+                        </select>
+                        <select onChange={this.handleWeek}>
+                          {weekOptions}
+                        </select>
+                        <a
+                          onClick={e => {
+                            e.preventDefault();
+                            this.addRoutine(data, this.state.name);
+                          }}
+                        >
+                          Add Routine Sets
+                        </a>
+                      </form>
                       <SubmitButton
                         onClick={e => {
                           e.preventDefault();
