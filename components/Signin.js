@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { CURRENT_USER_QUERY } from "./User";
 import Router from "next/router";
+import { SignIn, StyledButton } from "./styles/Inputs";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -34,7 +35,7 @@ class Signin extends React.Component {
             if (loading) return <p>Loading...</p>;
           }
           return (
-            <form
+            <SignIn
               method="post"
               onSubmit={async e => {
                 e.preventDefault();
@@ -43,17 +44,17 @@ class Signin extends React.Component {
                 Router.push({ pathname: "/newlog" });
               }}
             >
-              <fieldset disabled={loading} aria-busy={loading}>
-                <h2>Sign in</h2>
-                <label htmlFor="email" />
+              <fieldset disabled={loading} aria-disabled={loading}>
+                <div id="header-backdrop">
+                  <h2>Log in</h2>
+                </div>
                 <input
                   type="email"
                   name="email"
-                  placeholder="email"
+                  placeholder="Email"
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
-                <label htmlFor="password" />
                 <input
                   type="password"
                   name="password"
@@ -61,9 +62,9 @@ class Signin extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
-                <button type="submit">Submit</button>
+                <StyledButton type="submit">Log In</StyledButton>
               </fieldset>
-            </form>
+            </SignIn>
           );
         }}
       </Mutation>

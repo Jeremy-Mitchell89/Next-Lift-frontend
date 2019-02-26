@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import DeleteLog from "./DeleteLog";
 import { format, parse } from "date-fns";
+import { StyledSecondaryButton, StyledButton } from "./styles/Inputs";
 
 const Content = styled.div`
   display: grid;
@@ -24,24 +25,6 @@ const ContainerLabels = styled.div`
   h3 {
     height: 100%;
     margin: 0;
-  }
-`;
-
-const EditButton = styled.button`
-  margin: 10px;
-  top: 50%;
-  font-size: 1.5rem;
-  padding: 10px 15px 10px 15px;
-  background-color: rgb(244, 152, 65);
-  color: #ffffff;
-  :hover {
-    background-color: #f98211;
-    outline: none;
-  }
-  border-radius: 10px;
-  cursor: pointer;
-  :focus {
-    outline: none;
   }
 `;
 
@@ -67,9 +50,9 @@ class Log extends React.Component {
           </div>
           <div>
             <Link href={{ pathname: "log", query: { id: this.props.log.id } }}>
-              <EditButton>Edit</EditButton>
+              <StyledSecondaryButton>Edit</StyledSecondaryButton>
             </Link>
-            <DeleteLog id={this.props.log.id} />
+            <StyledButton id={this.props.log.id}>Delete Log</StyledButton>
           </div>
         </Content>
       </div>

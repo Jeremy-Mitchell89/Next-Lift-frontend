@@ -1,8 +1,9 @@
 import React from "react";
 import gql from "graphql-tag";
-import StyledForm from "./styles/StyledForm";
+import { StyledFormNewLog } from "./styles/StyledForm";
 import { Mutation } from "react-apollo";
 import Router from "next/router";
+import { StyledButton } from "./styles/Inputs";
 
 const CREATE_LOG_MUTATION = gql`
   mutation CREATE_LOG_MUTATION($title: String!, $notes: String!) {
@@ -26,7 +27,7 @@ class CreateNewLog extends React.Component {
       <Mutation mutation={CREATE_LOG_MUTATION} variables={this.state}>
         {(createLog, { error, loading }) => {
           return (
-            <StyledForm
+            <StyledFormNewLog
               onSubmit={async e => {
                 e.preventDefault();
                 const res = await createLog();
@@ -50,12 +51,12 @@ class CreateNewLog extends React.Component {
                   onChange={this.handleChange}
                   type="text"
                   name="notes"
-                  rows="4"
+                  rows="1"
                   value={this.state.notes}
                 />
-                <button type="submit">Submit</button>
+                <StyledButton type="submit">Submit</StyledButton>
               </fieldset>
-            </StyledForm>
+            </StyledFormNewLog>
           );
         }}
       </Mutation>

@@ -6,20 +6,6 @@ import Log from "./Log";
 import User from "./User";
 import Error from "./ErrorMessage";
 
-// const MY_LOGS_QUERY = gql`
-//   query MY_LOGS_QUERY($skip: Int = 0, $first: Int = 16) {
-//     logs(first: $first, skip: $skip, orderBy: title_DESC) {
-//       id
-//       title
-//       notes
-//       user {
-//         id
-//         name
-//       }
-//     }
-//   }
-// `;
-
 const MY_LOGS_QUERY = gql`
   query MY_LOGS_QUERY {
     myLogs(orderBy: createdAt_DESC) {
@@ -50,13 +36,6 @@ const Container = styled.div`
     padding-top: 1rem;
     text-align: center;
   }
-`;
-const ContainerLabels = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 0px;
-  border-bottom: 3px solid black;
-  background-color: white;
 `;
 
 class Logs extends React.Component {

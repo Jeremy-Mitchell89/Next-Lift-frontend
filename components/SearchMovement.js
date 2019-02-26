@@ -4,6 +4,7 @@ import { ApolloConsumer } from "react-apollo";
 import gql from "graphql-tag";
 import debounce from "lodash.debounce";
 import { SearchStyles, DropDown, DropDownItem } from "./styles/Search";
+import { StyledInput } from "./styles/Inputs";
 
 const SEARCH_MOVEMENTS_QUERY = gql`
   query SEARCH_MOVEMENTS_QUERY($searchTerm: String!) {
@@ -44,13 +45,12 @@ class SearchMovement extends React.Component {
             <div>
               <ApolloConsumer>
                 {client => (
-                  <input
+                  <StyledInput
                     required
                     {...getInputProps({
                       type: "search",
                       placeholder: "Search For A Movement",
                       id: "search",
-
                       onChange: e => {
                         this.props.passValUp(e.target.value);
                         e.persist();

@@ -1,6 +1,7 @@
 import React from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import { SignUp, StyledButton } from "./styles/Inputs";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -35,7 +36,7 @@ class Signup extends React.Component {
     return (
       <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
         {(signup, { error, loading }) => (
-          <form
+          <SignUp
             method="post"
             onSubmit={async e => {
               e.preventDefault();
@@ -44,34 +45,36 @@ class Signup extends React.Component {
             }}
           >
             <fieldset disabled={loading} aria-disabled={loading}>
-              <h2>Signup for an account</h2>
-              <label htmlFor="email">Email</label>
+              <h2>Sign up for an account</h2>
               <input
+                label="Email"
                 type="email"
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
-              <label htmlFor="name">Name</label>
               <input
+                label="Name"
                 type="text"
                 name="name"
                 placeholder="Name"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
-              <label htmlFor="password">Password</label>
               <input
+                label="Password"
                 type="password"
                 name="password"
-                placeholder="password"
+                placeholder="Password"
                 value={this.state.password}
                 onChange={this.handleChange}
               />
-              <button type="submit">Submit</button>
+              <StyledButton variant="contained" color="primary" type="submit">
+                Sign Up
+              </StyledButton>
             </fieldset>
-          </form>
+          </SignUp>
         )}
       </Mutation>
     );

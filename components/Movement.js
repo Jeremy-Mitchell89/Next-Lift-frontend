@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { ALL_MOVEMENTS_QUERY } from "./Movements";
 import Link from "next/link";
+import { StyledButton, StyledSecondaryButton } from "./styles/Inputs";
 
 const StyledItem = styled.div`
   display: grid;
@@ -17,42 +18,6 @@ const DELETE_MOVEMENT_MUTATION = gql`
     deleteMovement(id: $id) {
       id
     }
-  }
-`;
-const EditButton = styled.a`
-  margin: 10px;
-  top: 50%;
-  font-size: 1rem;
-  padding: 10px 15px 10px 15px;
-  background-color: rgb(244, 152, 65);
-  color: #ffffff;
-  :hover {
-    background-color: #f98211;
-    outline: none;
-  }
-  border-radius: 10px;
-  cursor: pointer;
-  :focus {
-    outline: none;
-  }
-`;
-
-const DeleteButton = styled.button`
-  margin: 10px;
-  top: 50%;
-  font-size: 1rem;
-  padding: 10px 15px 10px 15px;
-  background-color: rgb(244, 80, 66);
-  color: #e2e2e2;
-  border: none;
-  :hover {
-    cursor: pointer;
-    background-color: #ed2a1a;
-    outline: none;
-  }
-  border-radius: 10px;
-  :focus {
-    outline: none;
   }
 `;
 class Movement extends React.Component {
@@ -81,22 +46,22 @@ class Movement extends React.Component {
             <div
               style={{ display: "flex", flexDirection: "column", width: "70%" }}
             >
-              <DeleteButton
-                onClick={e => {
-                  e.preventDefault();
-                  deleteMovement();
-                }}
-              >
-                Delete Movement
-              </DeleteButton>
               <Link
                 href={{
                   pathname: "/update",
                   query: { id: this.props.move.id }
                 }}
               >
-                <EditButton>Edit Movement</EditButton>
+                <StyledSecondaryButton>Edit Movement</StyledSecondaryButton>
               </Link>
+              <StyledButton
+                onClick={e => {
+                  e.preventDefault();
+                  deleteMovement();
+                }}
+              >
+                Delete Movement
+              </StyledButton>
             </div>
           </StyledItem>
         )}

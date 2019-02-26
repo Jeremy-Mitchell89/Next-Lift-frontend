@@ -4,30 +4,13 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { WEIGHTS_QUERY } from "./Weights";
 import styled from "styled-components";
+import { StyledSecondaryButton } from "./styles/Inputs";
 
 const DELETE_WEIGHT_MUTATION = gql`
   mutation DELETE_WEIGHT_MUTATION($id: ID!) {
     deleteWeight(id: $id) {
       id
     }
-  }
-`;
-const DeleteButton = styled.button`
-  margin: 10px;
-  top: 50%;
-  max-width: 100px;
-  font-size: 1.1rem;
-  padding: 10px 15px 10px 15px;
-  background-color: rgb(244, 80, 66);
-  color: #e2e2e2;
-  :hover {
-    cursor: pointer;
-    background-color: #ed2a1a;
-    outline: none;
-  }
-  border-radius: 10px;
-  :focus {
-    outline: none;
   }
 `;
 
@@ -70,14 +53,15 @@ class Weight extends React.Component {
                   {this.props.weight.weight} lbs.
                 </p>
               </div>
-              <DeleteButton
+              <StyledSecondaryButton
                 onClick={e => {
                   e.preventDefault();
                   deleteWeight();
                 }}
+                style={{ width: "30%" }}
               >
                 Delete
-              </DeleteButton>
+              </StyledSecondaryButton>
             </>
           );
         }}

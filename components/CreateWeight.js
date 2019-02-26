@@ -3,6 +3,7 @@ import styled from "styled-components";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import { WEIGHTS_QUERY } from "./Weights";
+import { StyledButton, StyledInput } from "./styles/Inputs";
 
 const StyledForm = styled.form`
   border: 5px solid white;
@@ -21,23 +22,12 @@ const StyledForm = styled.form`
     border-right: none;
     border-left: none;
     border-bottom: 1px solid black;
-    background-color: #e8eeef;
     border-radius: 3px;
   }
   input:focus,
   textarea:focus,
   select:focus {
-    background-color: #b7bbbc;
     outline: none;
-  }
-  select:focus {
-    outline: none;
-    opacity: 1.1;
-  }
-  button:focus,
-  button:hover {
-    outline: none;
-    background-color: rgb(0, 100, 0);
   }
   h1 {
     text-align: center;
@@ -46,21 +36,6 @@ const StyledForm = styled.form`
     border: none;
     padding: 0;
     margin: 0 auto;
-  }
-  button {
-    margin-top: 20px;
-    margin-left: 40px;
-    top: 50%;
-    font-size: 1rem;
-    padding: 10px 15px 10px 15px;
-    background-color: rgb(0, 160, 0);
-    :hover {
-    }
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  button {
-    color: #e2e2e2;
   }
 `;
 
@@ -96,14 +71,14 @@ class WeightForm extends React.Component {
             >
               <fieldset disabled={loading} aria-busy={loading}>
                 <h1>Enter Today's Weight</h1>
-                <input
+                <StyledInput
                   value={this.state.weight}
                   placeholder="Weight"
                   name="weight"
                   type="number"
                   onChange={this.handleChange}
                 />
-                <button type="submit">Submit</button>
+                <StyledButton type="submit">Submit</StyledButton>
               </fieldset>
             </StyledForm>
           );

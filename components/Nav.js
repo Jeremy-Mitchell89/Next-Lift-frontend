@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import User, { CURRENT_USER_QUERY } from "./User";
 import Signout from "./Signout";
+import AppBar from "@material-ui/core/AppBar";
 
 const NavStyles = styled.ul`
   margin: 0;

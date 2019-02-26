@@ -1,11 +1,11 @@
 const routines = {
-  standard531: {
+  Standard_531: {
     week1: { weight: [0.65, 0.75, 0.85], reps: [5, 5, 5] },
     week2: { weight: [0.7, 0.8, 0.9], reps: [3, 3, 3] },
     week3: { weight: [0.75, 0.85, 0.95], reps: [5, 3, 1] },
     deload: { weight: [0.75, 0.85, 0.95], reps: [5, 3, 1] }
   },
-  pervertor: {
+  Pervertor: {
     week1: {
       weight: [
         0.4,

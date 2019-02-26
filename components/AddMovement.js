@@ -5,7 +5,14 @@ import { Mutation, Query } from "react-apollo";
 import { LOG_DETAILS_QUERY } from "./LogDetails";
 import { CURRENT_USER_QUERY } from "./User";
 import SearchMovement from "./SearchMovement";
-import { StyledFormAddMovement, SubmitButton } from "./styles/StyledForm";
+import { StyledFormAddMovement } from "./styles/StyledForm";
+import {
+  StyledSelect,
+  SubmitButton,
+  StyledButton,
+  StyledSecondaryButton,
+  StyledInput
+} from "./styles/Inputs";
 import Error from "./ErrorMessage";
 
 const ADD_TO_LOG_MUTATION = gql`
@@ -26,7 +33,7 @@ class AddMovement extends React.Component {
       weight: [""],
       reps: [""],
       show: false,
-      routine: "standard531",
+      routine: "Standard_531",
       week: "week1"
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
@@ -110,7 +117,7 @@ class AddMovement extends React.Component {
         <div>
           <li>
             {i + 1}.
-            <input
+            <StyledInput
               key={i}
               name={`weight-${i}`}
               type="number"
@@ -121,7 +128,7 @@ class AddMovement extends React.Component {
         </div>
         <div>
           <li>
-            <input
+            <StyledInput
               key={i}
               name={`reps-${i}`}
               type="number"
@@ -168,6 +175,7 @@ class AddMovement extends React.Component {
                         }}
                       >
                         <Error error={error} />
+
                         <fieldset disabled={loading} aria-busy={loading}>
                           <h2>Add New Movement</h2>
                           <label>Name of Movement</label>
@@ -186,54 +194,60 @@ class AddMovement extends React.Component {
                             <label>Reps</label>
                           </div>
                           <div>{weights}</div>
-                          <SubmitButton
+
+                          <StyledSecondaryButton
                             type="button"
                             onClick={this.handleNewMovement}
                           >
                             Add Set
-                          </SubmitButton>
-                          <SubmitButton type="submit">
+                          </StyledSecondaryButton>
+                          <StyledSecondaryButton type="submit">
                             Submit Movement
-                          </SubmitButton>
+                          </StyledSecondaryButton>
                         </fieldset>
                       </StyledFormAddMovement>
                       <form>
-                        <select onChange={this.handleRoutine}>
+                        <p>
+                          Select routine and week from the dropdown lists to
+                          pre-fill working sets on main movement based off maxes
+                          in your profile.
+                        </p>
+                        <StyledSelect onChange={this.handleRoutine}>
                           {routineOptions}
-                        </select>
-                        <select onChange={this.handleWeek}>
+                        </StyledSelect>
+                        <StyledSelect onChange={this.handleWeek}>
                           {weekOptions}
-                        </select>
-                        <a
+                        </StyledSelect>
+                        <StyledSecondaryButton
                           onClick={e => {
                             e.preventDefault();
                             this.addRoutine(data, this.state.name);
                           }}
                         >
                           Add Routine Sets
-                        </a>
+                        </StyledSecondaryButton>
                       </form>
-                      <SubmitButton
+                      <StyledButton
                         onClick={e => {
                           e.preventDefault();
                           this.setState({ show: !this.state.show });
                         }}
                       >
                         Hide
-                      </SubmitButton>
+                      </StyledButton>
                     </section>
                   );
                 else
                   return (
                     <div>
-                      <SubmitButton
+                      <StyledButton
                         onClick={e => {
                           e.preventDefault();
                           this.setState({ show: !this.state.show });
                         }}
                       >
                         Add New Movement
-                      </SubmitButton>
+                      </StyledButton>
                     </div>
                   );
               }

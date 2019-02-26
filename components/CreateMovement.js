@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import StyledForm from "./styles/StyledForm";
 import { Mutation } from "react-apollo";
 import Router from "next/router";
+import { StyledButton, StyledInput, StyledSelect } from "./styles/Inputs";
 
 const CREATE_MOVEMENT_MUTATION = gql`
   mutation CREATE_MOVEMENT_MUTATION(
@@ -52,7 +53,7 @@ class CreateMovement extends React.Component {
             >
               <h1>Create a New Movement</h1>
               <fieldset>
-                <input
+                <StyledInput
                   required
                   name="name"
                   placeholder="Name"
@@ -70,7 +71,7 @@ class CreateMovement extends React.Component {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <select
+                  <StyledSelect
                     required
                     name="primaryMuscleWorked"
                     value={this.state.primaryMuscleWorked}
@@ -86,8 +87,8 @@ class CreateMovement extends React.Component {
                     <option>Shoulders</option>
                     <option>Biceps</option>
                     <option>Triceps</option>
-                  </select>
-                  <select
+                  </StyledSelect>
+                  <StyledSelect
                     name="secondaryMuscleWorked"
                     value={this.state.secondaryMuscleWorked}
                     onChange={this.handleChange}
@@ -102,9 +103,9 @@ class CreateMovement extends React.Component {
                     <option>Shoulders</option>
                     <option>Biceps</option>
                     <option>Triceps</option>
-                  </select>
+                  </StyledSelect>
                 </div>
-                <button type="submit">Submit</button>
+                <StyledButton type="submit">Submit</StyledButton>
               </fieldset>
             </StyledForm>
           );

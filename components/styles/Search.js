@@ -5,7 +5,6 @@ const SearchStyles = styled.div`
   input {
     width: 100%;
     padding: 10px;
-    border: 0;
     &.loading {
       animation: 0.5s ease-in-out infinite alternate;
     }

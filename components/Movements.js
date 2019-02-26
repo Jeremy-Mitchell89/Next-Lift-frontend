@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Movement from "./Movement";
+import Error from "./ErrorMessage";
 
 const ALL_MOVEMENTS_QUERY = gql`
   query ALL_MOVEMENTS_QUERY($skip: Int = 0, $first: Int = 16) {
@@ -43,6 +44,7 @@ class Movements extends React.Component {
         {({ data, error, loading }) => {
           return (
             <Container>
+              <Error error={error} />
               <ContainerLabels>
                 <h2>Movement</h2>
                 <h2>Description</h2>
