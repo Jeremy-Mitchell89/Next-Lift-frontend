@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import gql from "graphql-tag";
+import Link from "next/link";
 import { Mutation } from "react-apollo";
 import { LOG_DETAILS_QUERY } from "./LogDetails";
+import { StyledButton, StyledSecondaryButton } from "./styles/Inputs";
 
 const DELETE_LOGMOVE_MUTATION = gql`
   mutation DELETE_LOGMOVE_MUTATION($id: ID!) {
@@ -53,13 +55,21 @@ class LogMove extends React.Component {
                   </div>
                 ))}
               </SetContainer>
-              <button
+              <Link
+                href={{
+                  pathname: "/updatemove",
+                  query: { id: id, reps: reps, weight: weight }
+                }}
+              >
+                <StyledSecondaryButton>Edit Movement</StyledSecondaryButton>
+              </Link>
+              <StyledButton
                 onClick={e => {
                   deleteMove();
                 }}
               >
                 Delete Movement
-              </button>
+              </StyledButton>
             </div>
           );
         }}

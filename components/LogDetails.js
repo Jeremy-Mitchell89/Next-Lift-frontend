@@ -1,5 +1,4 @@
 import React from "react";
-import StyledForm from "./styles/StyledForm";
 import AddMovement from "./AddMovement";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";

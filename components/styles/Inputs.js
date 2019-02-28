@@ -47,7 +47,8 @@ const StyledButton = styled.button`
   border-radius: 4px;
   font-size: 0.9rem;
   line-height: 1.75;
-  :hover {
+  :hover,
+  :focus {
     background-color: #d32f2f;
   }
 `;
@@ -65,7 +66,8 @@ const StyledSecondaryButton = styled.button`
   line-height: 1.75;
   background-color: white;
   transition: background-color 0.2s ease-in;
-  :hover {
+  :hover,
+  :focus {
     background-color: #ffcdd2;
   }
 `;
