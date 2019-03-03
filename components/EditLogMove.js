@@ -3,6 +3,8 @@ import { StyledFormAddMovement } from "./styles/StyledForm";
 import gql from "graphql-tag";
 import { Query, Mutation } from "react-apollo";
 import Router from "next/router";
+import Link from "next/link";
+import { LOG_DETAILS_QUERY } from "./LogDetails";
 import {
   StyledInput,
   StyledButton,
@@ -27,14 +29,18 @@ class EditLogMove extends React.Component {
     this.handleNewMovement = this.handleNewMovement.bind(this);
   }
   componentWillMount() {
-    console.log(this.state.weight);
-    if (this.props.weight.length === 1) {
+    if (typeof this.props.weight === "string") {
       this.setState({
-        weight: [parseInt(this.props.weight)],
-        reps: [parseInt(this.props.reps)]
+        weight: [Number(this.props.weight)],
+        reps: [Number(this.props.reps)]
       });
+      console.log(this.state);
     } else {
-      this.setState({ weight: this.props.weight, reps: this.props.reps });
+      let weightNumbers = [];
+      let repNumbers = [];
+      this.props.weight.map(weight => weightNumbers.push(Number(weight)));
+      this.props.reps.map(reps => repNumbers.push(Number(reps)));
+      this.setState({ weight: weightNumbers, reps: repNumbers });
     }
   }
   handleChangeWeight = e => {
@@ -98,6 +104,9 @@ class EditLogMove extends React.Component {
           reps: this.state.reps,
           weight: this.state.weight
         }}
+        refetchQueries={[
+          { query: LOG_DETAILS_QUERY, variables: { id: this.props.id } }
+        ]}
       >
         {(editLogMove, { loading, error }) => {
           return (
@@ -113,9 +122,8 @@ class EditLogMove extends React.Component {
                 }}
               >
                 {" "}
-                <fieldset>
+                <fieldset disabled={loading} aria-busy={loading}>
                   <h2>Edit Movement</h2>
-                  {console.log(this.props)}
                   <div
                     style={{
                       display: "grid",
@@ -126,7 +134,6 @@ class EditLogMove extends React.Component {
                     <label>Reps</label>
                   </div>
                   <div>{weights}</div>
-
                   <StyledSecondaryButton
                     type="button"
                     onClick={this.handleNewMovement}
@@ -138,6 +145,9 @@ class EditLogMove extends React.Component {
                   </StyledSecondaryButton>
                 </fieldset>
               </StyledFormAddMovement>
+              <Link href={{ pathname: "log", query: { id: this.props.logId } }}>
+                <StyledSecondaryButton>Back to Log</StyledSecondaryButton>
+              </Link>
             </section>
           );
         }}

@@ -35,7 +35,13 @@ const MovementContainer = styled.div`
 class LogDetails extends React.Component {
   render() {
     return (
-      <Query query={LOG_DETAILS_QUERY} variables={{ id: this.props.id }}>
+      <Query
+        query={LOG_DETAILS_QUERY}
+        variables={{ id: this.props.id }}
+        refetchQueries={[
+          { query: LOG_DETAILS_QUERY, variables: { id: this.props.id } }
+        ]}
+      >
         {({ data, loading }) => {
           return (
             <div>

@@ -32,7 +32,7 @@ class LogMove extends React.Component {
     cache.writeQuery({ query: LOG_DETAILS_QUERY, data });
   };
   render() {
-    const { name, weight, reps, id } = this.props;
+    const { name, weight, reps, id, logId } = this.props;
     return (
       <Mutation
         mutation={DELETE_LOGMOVE_MUTATION}
@@ -58,7 +58,7 @@ class LogMove extends React.Component {
               <Link
                 href={{
                   pathname: "/updatemove",
-                  query: { id: id, reps: reps, weight: weight }
+                  query: { logId: logId, id: id, reps: reps, weight: weight }
                 }}
               >
                 <StyledSecondaryButton>Edit Movement</StyledSecondaryButton>
