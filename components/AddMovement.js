@@ -258,5 +258,5 @@ class AddMovement extends React.Component {
     );
   }
 }
-
+export { ADD_TO_LOG_MUTATION };
 export default AddMovement;

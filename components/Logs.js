@@ -12,6 +12,7 @@ const MY_LOGS_QUERY = gql`
       id
       title
       notes
+      date
       createdAt
       movements {
         weight

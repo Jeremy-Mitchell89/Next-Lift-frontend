@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import styled from "styled-components";
 import LogMove from "./LogMove";
+import DuplicateLog from "./DuplicateLog";
 
 const LOG_DETAILS_QUERY = gql`
   query LOG_DETAILS_QUERY($id: ID!) {
@@ -50,6 +51,7 @@ class LogDetails extends React.Component {
                 <h1>{data.log.title}</h1>
                 <p>{data.log.notes}</p>
               </div>
+              <DuplicateLog log={data.log} />
               <MovementContainer>
                 {data.log.movements.map((move, i) => {
                   return (
@@ -64,6 +66,7 @@ class LogDetails extends React.Component {
                   );
                 })}
               </MovementContainer>
+
               <div />
             </div>
           );

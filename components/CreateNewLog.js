@@ -4,10 +4,15 @@ import { StyledFormNewLog } from "./styles/StyledForm";
 import { Mutation } from "react-apollo";
 import Router from "next/router";
 import { StyledButton } from "./styles/Inputs";
+import { format } from "date-fns";
 
 const CREATE_LOG_MUTATION = gql`
-  mutation CREATE_LOG_MUTATION($title: String!, $notes: String!) {
-    createLog(title: $title, notes: $notes) {
+  mutation CREATE_LOG_MUTATION(
+    $title: String!
+    $notes: String!
+    $date: String!
+  ) {
+    createLog(title: $title, notes: $notes, date: $date) {
       id
     }
   }
@@ -16,7 +21,8 @@ const CREATE_LOG_MUTATION = gql`
 class CreateNewLog extends React.Component {
   state = {
     title: "",
-    notes: ""
+    notes: "",
+    date: format(new Date(), "YYYY-MM-DD")
   };
   handleChange = e => {
     e.preventDefault();
@@ -54,6 +60,12 @@ class CreateNewLog extends React.Component {
                   rows="1"
                   value={this.state.notes}
                 />
+                <input
+                  name="date"
+                  onChange={this.handleChange}
+                  type="date"
+                  value={this.state.date}
+                />
                 <StyledButton type="submit">Submit</StyledButton>
               </fieldset>
             </StyledFormNewLog>
@@ -63,5 +75,5 @@ class CreateNewLog extends React.Component {
     );
   }
 }
-
+export { CREATE_LOG_MUTATION };
 export default CreateNewLog;

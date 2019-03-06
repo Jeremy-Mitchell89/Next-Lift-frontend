@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import DeleteLog from "./DeleteLog";
-import { format, parse } from "date-fns";
 import { StyledSecondaryButton, StyledButton } from "./styles/Inputs";
 
 const Content = styled.div`
@@ -40,7 +39,7 @@ class Log extends React.Component {
         </ContainerLabels>
         <Content>
           <div>
-            <p>{format(parse(this.props.log.createdAt), "MM/DD/YYYY")}</p>
+            <p>{this.props.log.date}</p>
           </div>
           <div>
             <p>{this.props.log.title}</p>
@@ -50,9 +49,9 @@ class Log extends React.Component {
           </div>
           <div>
             <Link href={{ pathname: "log", query: { id: this.props.log.id } }}>
-              <StyledSecondaryButton>Edit</StyledSecondaryButton>
+              <StyledSecondaryButton>Log Details</StyledSecondaryButton>
             </Link>
-            <StyledButton id={this.props.log.id}>Delete Log</StyledButton>
+            <DeleteLog id={this.props.log.id}>Delete Log</DeleteLog>
           </div>
         </Content>
       </div>
