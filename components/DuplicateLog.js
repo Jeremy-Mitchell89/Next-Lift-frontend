@@ -3,6 +3,7 @@ import { CREATE_LOG_MUTATION } from "./CreateNewLog";
 import { Mutation } from "react-apollo";
 import { format } from "date-fns";
 import gql from "graphql-tag";
+import { StyledButton } from "./styles/Inputs";
 
 const DUPLICATE_TO_LOG_MUTATION = gql`
   mutation DUPLICATE_TO_LOG_MUTATION(
@@ -43,7 +44,7 @@ class DuplicateLog extends React.Component {
             >
               {DuplicateLogMoves => {
                 return (
-                  <button
+                  <StyledButton
                     onClick={async e => {
                       const log = await createLog().then(newLog => {
                         console.log(this.props.log.movements);
@@ -58,11 +59,10 @@ class DuplicateLog extends React.Component {
                           });
                         });
                       });
-                      // DuplicateLogMoves();
                     }}
                   >
-                    Duplicate
-                  </button>
+                    Duplicate Log
+                  </StyledButton>
                 );
               }}
             </Mutation>

@@ -48,6 +48,14 @@ class Log extends React.Component {
             <p>{this.props.log.notes}</p>
           </div>
           <div>
+            <Link
+              href={{
+                pathname: "/updatelog",
+                query: { id: this.props.log.id }
+              }}
+            >
+              <StyledSecondaryButton>Edit Log</StyledSecondaryButton>
+            </Link>
             <Link href={{ pathname: "log", query: { id: this.props.log.id } }}>
               <StyledSecondaryButton>Log Details</StyledSecondaryButton>
             </Link>

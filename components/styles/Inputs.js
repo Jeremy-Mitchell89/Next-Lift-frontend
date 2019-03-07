@@ -54,7 +54,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledSecondaryButton = styled.button`
-  margin: 20px 0 20px 0;
+  margin: 20px 10px 20px 10px;
   border: 1px solid #d32f2f;
   padding: 6px 16px;
   color: #d32f2f;
@@ -81,6 +81,7 @@ const StyledTextButton = styled.button`
   outline: inherit;
   text-transform: uppercase;
   border-radius: 4px;
+  border: none;
   font-size: 0.9rem;
   line-height: 1.75;
   background-color: white;

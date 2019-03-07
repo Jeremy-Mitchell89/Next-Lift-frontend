@@ -30,6 +30,7 @@ class DeleteLog extends Component {
         {(deleteLog, { error, loading }) => {
           return (
             <StyledButton
+              style={{ margin: "0 0 20px 0 " }}
               onClick={e => {
                 e.preventDefault();
                 deleteLog();

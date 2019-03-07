@@ -12,6 +12,7 @@ const LOG_DETAILS_QUERY = gql`
       id
       title
       notes
+      date
       movements {
         name
         weight
@@ -46,12 +47,13 @@ class LogDetails extends React.Component {
         {({ data, loading }) => {
           return (
             <div>
+              <DuplicateLog log={data.log} />
               <AddMovement id={this.props.id} />
               <div>
                 <h1>{data.log.title}</h1>
                 <p>{data.log.notes}</p>
               </div>
-              <DuplicateLog log={data.log} />
+
               <MovementContainer>
                 {data.log.movements.map((move, i) => {
                   return (
