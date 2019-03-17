@@ -40,7 +40,7 @@ class DuplicateLog extends React.Component {
           return (
             <Mutation mutation={DUPLICATE_TO_LOG_MUTATION}>
               {DuplicateLogMoves => {
-                if (loading) return <p>Test</p>;
+                // if (loading) {let Dup = 'Duplicating...'};
                 return (
                   <StyledButton
                     style={{ marginTop: 0 }}
@@ -59,7 +59,7 @@ class DuplicateLog extends React.Component {
                       });
                     }}
                   >
-                    Duplicate Log
+                    {``}
                   </StyledButton>
                 );
               }}
