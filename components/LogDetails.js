@@ -47,7 +47,6 @@ class LogDetails extends React.Component {
         {({ data, loading }) => {
           return (
             <div>
-              <DuplicateLog log={data.log} />
               <AddMovement id={this.props.id} />
               <div>
                 <h1>{data.log.title}</h1>
@@ -68,7 +67,8 @@ class LogDetails extends React.Component {
                   );
                 })}
               </MovementContainer>
-
+              <h3>Want to copy this Log to today's date? Just duplicate it!</h3>
+              <DuplicateLog log={data.log} />
               <div />
             </div>
           );

@@ -36,18 +36,16 @@ class DuplicateLog extends React.Component {
           date: format(new Date(), "YYYY-MM-DD")
         }}
       >
-        {createLog => {
+        {(createLog, { loading, error }) => {
           return (
-            <Mutation
-              mutation={DUPLICATE_TO_LOG_MUTATION}
-              // variables={this.props.log.movements}
-            >
+            <Mutation mutation={DUPLICATE_TO_LOG_MUTATION}>
               {DuplicateLogMoves => {
+                if (loading) return <p>Test</p>;
                 return (
                   <StyledButton
+                    style={{ marginTop: 0 }}
                     onClick={async e => {
                       const log = await createLog().then(newLog => {
-                        console.log(this.props.log.movements);
                         this.props.log.movements.map(move => {
                           DuplicateLogMoves({
                             variables: {

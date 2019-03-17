@@ -7,6 +7,10 @@ const theme = {};
 
 const StyledPage = styled.div``;
 
+const Content = styled.div`
+  padding: 0 3%;
+`;
+
 const Inner = styled.div`
   margin: 0 0;
   padding: 0;
@@ -20,7 +24,7 @@ class Page extends React.Component {
           <Inner>
             <Meta />
             <Header />
-            {this.props.children}
+            <Content>{this.props.children}</Content>
           </Inner>
         </StyledPage>
       </ThemeProvider>

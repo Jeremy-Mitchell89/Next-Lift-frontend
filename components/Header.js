@@ -1,7 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import Nav from "./Nav";
-import Link from "next/link";
+import NProgress from "nprogress";
+import Router from "next/router";
+
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 const Logo = styled.h1`
   padding: 0;
@@ -17,7 +29,7 @@ const Logo = styled.h1`
 `;
 
 const StyledHeader = styled.header`
-  .Navbar {
+  .bar {
     display: flex;
     justify-content: space-between;
     border-bottom: 10px solid #333;
@@ -28,7 +40,7 @@ class Header extends React.Component {
   render() {
     return (
       <StyledHeader>
-        <div className="Navbar">
+        <div className="bar">
           <Logo>
             <a>
               <img src="../static/barbell.png" alt="barbell icon" />
