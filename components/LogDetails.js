@@ -52,7 +52,6 @@ class LogDetails extends React.Component {
                 <h1>{data.log.title}</h1>
                 <p>{data.log.notes}</p>
               </div>
-
               <MovementContainer>
                 {data.log.movements.map((move, i) => {
                   return (

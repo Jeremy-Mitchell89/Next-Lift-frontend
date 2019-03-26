@@ -4,6 +4,7 @@ import { Mutation } from "react-apollo";
 import { format } from "date-fns";
 import gql from "graphql-tag";
 import { StyledButton } from "./styles/Inputs";
+import LoadingIcon from "./Loading";
 
 const DUPLICATE_TO_LOG_MUTATION = gql`
   mutation DUPLICATE_TO_LOG_MUTATION(
@@ -40,27 +41,29 @@ class DuplicateLog extends React.Component {
           return (
             <Mutation mutation={DUPLICATE_TO_LOG_MUTATION}>
               {DuplicateLogMoves => {
-                // if (loading) {let Dup = 'Duplicating...'};
                 return (
-                  <StyledButton
-                    style={{ marginTop: 0 }}
-                    onClick={async e => {
-                      const log = await createLog().then(newLog => {
-                        this.props.log.movements.map(move => {
-                          DuplicateLogMoves({
-                            variables: {
-                              logId: newLog.data.createLog.id,
-                              name: move.name,
-                              reps: move.reps,
-                              weight: move.weight
-                            }
+                  <div>
+                    <StyledButton
+                      style={{ marginTop: 0 }}
+                      onClick={async e => {
+                        const log = await createLog().then(newLog => {
+                          this.props.log.movements.map(move => {
+                            DuplicateLogMoves({
+                              variables: {
+                                logId: newLog.data.createLog.id,
+                                name: move.name,
+                                reps: move.reps,
+                                weight: move.weight
+                              }
+                            });
                           });
                         });
-                      });
-                    }}
-                  >
-                    {``}
-                  </StyledButton>
+                      }}
+                    >
+                      Duplicat{loading ? `ing...` : `e`}
+                    </StyledButton>
+                    {loading ? <LoadingIcon /> : null}
+                  </div>
                 );
               }}
             </Mutation>
