@@ -4,6 +4,7 @@ import { ApolloProvider } from "react-apollo";
 import Page from "../components/Page";
 import withData from "../lib/withData";
 
+//custom app for server side rendering taken from nextjs documentation. passes actual component along with a context object to render
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
