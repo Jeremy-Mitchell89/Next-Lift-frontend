@@ -49,7 +49,6 @@ class Logs extends React.Component {
           return (
             <Query query={MY_LOGS_QUERY} variables={{ id: me.id }}>
               {({ data, error, loading }) => {
-                if (loading) return <p>loading...</p>;
                 return (
                   <Container>
                     <Error error={error} />

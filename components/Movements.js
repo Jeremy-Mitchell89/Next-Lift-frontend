@@ -6,8 +6,8 @@ import Movement from "./Movement";
 import Error from "./ErrorMessage";
 
 const ALL_MOVEMENTS_QUERY = gql`
-  query ALL_MOVEMENTS_QUERY($skip: Int = 0, $first: Int = 16) {
-    movements(first: $first, skip: $skip, orderBy: name_DESC) {
+  query ALL_MOVEMENTS_QUERY {
+    movements(orderBy: name_ASC) {
       id
       name
       description

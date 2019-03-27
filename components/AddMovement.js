@@ -37,6 +37,7 @@ class AddMovement extends React.Component {
       week: "week1"
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
+    this.handleRemoveMovement = this.handleRemoveMovement.bind(this);
   }
 
   handleChangeWeight = e => {
@@ -62,6 +63,14 @@ class AddMovement extends React.Component {
       weight: [...weight, weight[weight.length - 1]],
       reps: [...reps, reps[reps.length - 1]]
     });
+  }
+  handleRemoveMovement(e) {
+    e.preventDefault();
+    let weights = [...this.state.weight];
+    let reps = [...this.state.reps];
+    weights.pop();
+    reps.pop();
+    this.setState({ weight: weights, reps: reps });
   }
   handleChange = e => {
     e.preventDefault();
@@ -200,6 +209,12 @@ class AddMovement extends React.Component {
                             onClick={this.handleNewMovement}
                           >
                             Add Set
+                          </StyledSecondaryButton>
+                          <StyledSecondaryButton
+                            type="button"
+                            onClick={this.handleRemoveMovement}
+                          >
+                            Remove Last Set
                           </StyledSecondaryButton>
                           <StyledSecondaryButton type="submit">
                             Submit Movement

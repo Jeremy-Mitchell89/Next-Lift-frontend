@@ -4,6 +4,7 @@ import { Mutation } from "react-apollo";
 import { CURRENT_USER_QUERY } from "./User";
 import Router from "next/router";
 import { SignIn, StyledButton } from "./styles/Inputs";
+import LoadingIcon from "./Loading";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -31,9 +32,6 @@ class Signin extends React.Component {
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
         {(signin, { loading, error }) => {
-          {
-            if (loading) return <p>Loading...</p>;
-          }
           return (
             <SignIn
               method="post"
@@ -63,6 +61,7 @@ class Signin extends React.Component {
                   onChange={this.handleChange}
                 />
                 <StyledButton type="submit">Log In</StyledButton>
+                {loading ? <LoadingIcon /> : null}
               </fieldset>
             </SignIn>
           );

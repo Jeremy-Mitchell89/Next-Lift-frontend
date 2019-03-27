@@ -2,6 +2,7 @@ import React from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { SignUp, StyledButton } from "./styles/Inputs";
+import LoadingIcon from "./Loading";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -73,6 +74,7 @@ class Signup extends React.Component {
               <StyledButton variant="contained" color="primary" type="submit">
                 Sign Up
               </StyledButton>
+              {loading ? <LoadingIcon /> : null}
             </fieldset>
           </SignUp>
         )}

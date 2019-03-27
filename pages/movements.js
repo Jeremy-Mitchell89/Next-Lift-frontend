@@ -1,12 +1,9 @@
 import Movements from "../components/Movements";
 
-const MovementsPage = props => {
-  return (
-    <div>
-      {console.log(props)}
-      <Movements />
-    </div>
-  );
-};
+const MovementsPage = props => (
+  <div>
+    <Movements />
+  </div>
+);
 
 export default MovementsPage;
