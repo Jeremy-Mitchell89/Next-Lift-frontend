@@ -19,12 +19,19 @@ const Logo = styled.h1`
   padding: 0;
   margin: 0;
   font-size: 3.8rem;
+
   img {
     max-width: 40px;
   }
   a {
     text-decoration: none;
     color: #333;
+    @media (max-width: 1300px) {
+      display: none;
+    }
+    @media (max-width: 700px) {
+      display: none;
+    }
   }
 `;
 
@@ -33,6 +40,9 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     border-bottom: 10px solid #333;
+    @media (max-width: 1300px) {
+      justify-content: flex-start;
+    }
   }
 `;
 
