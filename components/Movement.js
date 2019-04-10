@@ -27,7 +27,6 @@ class Movement extends React.Component {
     data.movements = data.movements.filter(
       movement => movement.id !== payload.data.deleteMovement.id
     );
-    console.log(data);
     cache.writeQuery({ query: ALL_MOVEMENTS_QUERY, data });
   };
   render() {

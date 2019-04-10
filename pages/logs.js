@@ -1,8 +1,11 @@
 import Logs from "../components/Logs";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 const LogsPage = props => (
   <div>
-    <Logs />
+    <PleaseSignIn>
+      <Logs />
+    </PleaseSignIn>
   </div>
 );
 
