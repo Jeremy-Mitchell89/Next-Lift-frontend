@@ -1,3 +1,5 @@
 describe("sample test", () => {
-  console.log("I am running some tests!!!!");
+  it("works as eexpected", () => {
+    expect(1).toEqual(100);
+  });
 });

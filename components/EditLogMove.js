@@ -67,6 +67,14 @@ class EditLogMove extends React.Component {
       reps: [...reps, reps[reps.length - 1]]
     });
   }
+  handleRemoveMovement(e) {
+    e.preventDefault();
+    let weights = [...this.state.weight];
+    let reps = [...this.state.reps];
+    weights.pop();
+    reps.pop();
+    this.setState({ weight: weights, reps: reps });
+  }
   render() {
     const weights = this.state.weight.map((weight, i) => (
       <div key={i} style={{ display: "flex" }}>
@@ -139,6 +147,12 @@ class EditLogMove extends React.Component {
                     onClick={this.handleNewMovement}
                   >
                     Add Set
+                  </StyledSecondaryButton>
+                  <StyledSecondaryButton
+                    type="button"
+                    onClick={this.handleRemoveMovement}
+                  >
+                    Remove Last Set
                   </StyledSecondaryButton>
                   <StyledSecondaryButton type="submit">
                     Submit Movement

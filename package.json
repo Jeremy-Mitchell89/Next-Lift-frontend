@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "heroku-postbuild": "next build",
-    "test": "jest --watch",
+    "test": "SET NODE_ENV=test&& jest --watch",
     "test-win": "SET NODE_ENV=test&& jest --watch"
   },
   "keywords": [],
