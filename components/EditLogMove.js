@@ -27,6 +27,7 @@ class EditLogMove extends React.Component {
       reps: []
     };
     this.handleNewMovement = this.handleNewMovement.bind(this);
+    this.handleRemoveMovement = this.handleRemoveMovement.bind(this);
   }
   componentWillMount() {
     if (typeof this.props.weight === "string") {
