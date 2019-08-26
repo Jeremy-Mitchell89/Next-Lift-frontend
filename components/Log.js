@@ -6,7 +6,7 @@ import { StyledSecondaryButton, StyledButton } from "./styles/Inputs";
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 0px;
   margin: 0 auto;
   text-align: center;
@@ -17,7 +17,7 @@ const Content = styled.div`
 `;
 const ContainerLabels = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 0px;
   border-bottom: 3px solid #333;
   justify-items: center;
@@ -35,6 +35,7 @@ class Log extends React.Component {
           <h3>Date of Log</h3>
           <h3>Title of Log</h3>
           <h3>Notes</h3>
+          <h3>Movements</h3>
           <h3>Action</h3>
         </ContainerLabels>
         <Content>
@@ -46,6 +47,11 @@ class Log extends React.Component {
           </div>
           <div>
             <p>{this.props.log.notes}</p>
+          </div>
+          <div>
+            {this.props.log.movements.map(move => (
+              <p>{move.name}</p>
+            ))}
           </div>
           <div>
             <Link

@@ -6,17 +6,36 @@ import Log from "./Log";
 import User from "./User";
 import Error from "./ErrorMessage";
 
+// const MY_LOGS_QUERY = gql`
+//   query MY_LOGS_QUERY {
+//     myLogs(orderBy: createdAt_DESC) {
+//       id
+//       title
+//       notes
+//       date
+//       createdAt
+//       movements {
+//         name
+//         weight
+//         reps
+//       }
+//       user {
+//         id
+//         name
+//       }
+//     }
+//   }
+// `;
 const MY_LOGS_QUERY = gql`
-  query MY_LOGS_QUERY {
-    myLogs(orderBy: createdAt_DESC) {
+  query MY_LOGS_QUERY($id: ID!) {
+    logs(where: { user: { id: $id } }, orderBy: createdAt_DESC) {
       id
       title
       notes
       date
       createdAt
       movements {
-        weight
-        reps
+        name
       }
       user {
         id
@@ -49,10 +68,11 @@ class Logs extends React.Component {
           return (
             <Query query={MY_LOGS_QUERY} variables={{ id: me.id }}>
               {({ data, error, loading }) => {
+                console.log(data.logs);
                 return (
                   <Container>
                     <Error error={error} />
-                    {data.myLogs.map(log => (
+                    {data.logs.map(log => (
                       <Log log={log} key={log.id} />
                     ))}
                   </Container>
