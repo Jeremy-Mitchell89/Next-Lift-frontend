@@ -85,5 +85,4 @@ class CreateNewLog extends React.Component {
     );
   }
 }
-export { CREATE_LOG_MUTATION };
 export default CreateNewLog;
