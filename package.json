@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "heroku-postbuild": "next build",
-    "test": "SET NODE_ENV=test&& jest --watch",
-    "test-win": "SET NODE_ENV=test&& jest --watch"
+    "start": "next start -p $PORT"
   },
   "keywords": [],
   "author": "",
